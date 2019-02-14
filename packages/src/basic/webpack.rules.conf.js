@@ -12,16 +12,22 @@ const createLintingRule = () => ({
   test: /\.(js|vue)$/,
   loader: 'eslint-loader',
   enforce: 'pre',
-  include: [utils.rootPath('src'), utils.rootPath('test')],
+  include: [utils.rootPath('src'), utils.rootPath('test')],// 指定检查的目录
+  // 这里的配置项参数将会被传递到 eslint 的 CLIEngine
   options: {
-    formatter: require('eslint-friendly-formatter'),
+    formatter: require('eslint-friendly-formatter'),// 指定错误报告的格式规范
     emitWarning: !config.dev.showEslintErrorsInOverlay
   }
 });
 
+const envConfMap = {
+  env: 'dev',
+  mock: 'dev',
+  prod: 'build',
+};
 
 const rules = [
-  ...(config.dev.useEslint ? [createLintingRule()] : []),
+  ...(config[envConfMap[process.env.env_config]].useEslint ? [createLintingRule()] : []),
   {
     test: /\.vue$/,
     loader: 'vue-loader',
