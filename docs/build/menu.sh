@@ -69,19 +69,31 @@ function runcommand {
             NODE_ENV=production npm_config_report=true Fn_run_prod ;;
           5)
 #            Fn_run_lint
+            echo
+            echo
             echo "developing..."
+            echo
             break ;;
           6)
 #            Fn_run_unit_test
+            echo
+            echo
             echo "developing..."
+            echo
             break ;;
           7)
 #           Fn_run_e2e
+           echo
+           echo
            echo "developing..."
+           echo
            break ;;
           8)
 #           Fn_run_unit_test && Fn_run_e2e
+           echo
+           echo
            echo "developing..."
+           echo
            break ;;
           9)
            Fn_update_node_modules ;;
