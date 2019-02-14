@@ -1,9 +1,9 @@
 #Design by Broccoli spring( gcx-高仓雄 ) <Lensgcx@163.com>
 #!/usr/bin/env bash
 
+#base_path='../lib' #基础路径
+base_path='node_modules/cx-builder/lib' #基础路径
 
-#base_path='node_modules/cx-vue-webpck-cli/lib' #基础路径
-base_path='../lib' #基础路径
 min_suffix='' #压缩后缀名
 
 update_CX_grid='cx-grid'
