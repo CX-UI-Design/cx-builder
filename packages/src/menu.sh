@@ -5,8 +5,9 @@
 #cd ./${path}  # go to current path
 #source ./sh/command.sh
 
-#base_path='./node_modules/cx-vue-webpck-cli/lib'
-base_path='../lib'
+#base_path='../lib'
+base_path='./node_modules/cx-builder/lib'
+
 source ${base_path}'/sh/command.sh'
 prefix=''
 
