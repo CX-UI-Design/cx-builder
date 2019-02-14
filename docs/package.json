@@ -23,7 +23,7 @@
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
-    "cx-builder": "^0.0.1"
+    "cx-builder": "^0.0.2"
   },
   "engines": {
     "node": ">= 6.0.0",
