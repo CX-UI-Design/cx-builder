@@ -25,7 +25,8 @@ module.exports = new Promise((resolve, reject) => {
       // Add FriendlyErrorsPlugin
       devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
         compilationSuccessInfo: {
-          notes: [`Create by Broccoli spring( gcx ) <Lensgcx@163.com>: https://github.com/Lensgcx`],
+          // notes: [`Create by Broccoli spring( gcx ) <Lensgcx@163.com>: https://github.com/Lensgcx`],\
+          notes: [`Create by Broccoli spring( gcx )`],
           messages: [
             `Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`,
           ],
