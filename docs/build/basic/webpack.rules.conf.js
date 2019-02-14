@@ -26,8 +26,6 @@ const envConfMap = {
   prod: 'build',
 };
 
-console.log(config[envConfMap[process.env.env_config]].useEslint);
-
 const rules = [
   ...(config[envConfMap[process.env.env_config]].useEslint ? [createLintingRule()] : []),
   {
