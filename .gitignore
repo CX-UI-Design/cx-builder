@@ -8,6 +8,7 @@ dist/
 lib/
 docs/dist/
 docs/node_modules/
+dist/cx-builder/
 
 
 ##############################
