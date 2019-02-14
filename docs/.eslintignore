@@ -2,6 +2,6 @@
 /core/
 /build/
 /dist/
-
+/src/
 /*.js
 /test/unit/coverage/
