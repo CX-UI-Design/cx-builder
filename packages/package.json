@@ -1,0 +1,27 @@
+{
+  "name": "cx-vue-webpack-cli-tools",
+  "version": "1.0.0",
+  "description": "build tools for cx-vue-webpack-cli",
+  "main": "index.js",
+  "scripts": {
+    "start": "gulp",
+    "dev": "gulp",
+    "build": "gulp"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.0",
+    "babel-preset-env": "^1.7.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.1",
+    "gulp-notify": "^3.2.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-replace": "^1.0.0",
+    "gulp-uglify": "^3.0.1",
+    "gulp-util": "^3.0.8"
+  },
+  "author": "",
+  "license": "ISC"
+}
