@@ -21,7 +21,7 @@ const createLintingRule = () => ({
 });
 
 const envConfMap = {
-  env: 'dev',
+  dev: 'dev',
   mock: 'dev',
   prod: 'build',
 };
