@@ -16,13 +16,9 @@
   ],
   "plugins": [
     "@babel/plugin-transform-runtime",
-    "@babel/plugin-proposal-class-properties",
-    [
-      "@babel/plugin-proposal-decorators",
-      {
-        "legacy": true
-      }
-    ],
+    "@babel/plugin-syntax-dynamic-import",
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }],
     "@babel/plugin-syntax-jsx",
     "@vue/babel-plugin-transform-vue-jsx",
     "jsx-v-model"
