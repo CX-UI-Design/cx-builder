@@ -5,11 +5,15 @@
 #cd ./${path}  # go to current path
 #source ./sh/command.sh
 
-base_path='./node_modules/cx-vue-webpck-cli/lib'
-source ${base_path}'/sh/command.sh'
+#base_path='../lib'
+base_path='./node_modules/cx-builder/lib'
 
+source ${base_path}'/sh/command.sh'
+prefix=''
+
+# menu show
 function menu {
-    clear
+#    clear
     echo
     echo -e '\t ========== Design by Broccoli spring( gcx ) =========='
     echo
@@ -32,7 +36,7 @@ function menu {
         \_/      \__/  \__/  \__/  \__/      \_/               \_/   \_/    \_/   \
     '
     echo
-    echo -e "\t\t\t === SASS Frontend operation Menu === \n"
+    echo -e "\t\t\t === NewSee frontend operation menu for SPA VUE-Project=== \n"
     echo -e "\t1. Run development"
     echo -e "\t2. Run mock"
     echo -e "\t3. Run production"
@@ -45,45 +49,84 @@ function menu {
     echo -e "\t10. Update all ns package"
     echo -e "\t0. Exit program\n\n"
     echo -en "\t\tEnter option: "
-    read -n 1 option
+    read -n 1 menuOption
 }
 
-while [ 1 ]
-do
-    menu
-    case $option in
-        0)
-          break ;;
-        1)
-          Fn_run_dev
-          break ;;
-        2)
-          Fn_run_mock
-          break ;;
-        3)
-          Fn_run_prod
-          break ;;
-        4)
-          NODE_ENV=production npm_config_report=true Fn_run_prod ;;
-        5)
-          Fn_run_lint
-          break ;;
-        6)
-          Fn_run_unit_test
-          break ;;
-        7)
-         Fn_run_e2e
-         break ;;
-        8)
-         Fn_run_unit_test && Fn_run_e2e ;;
-        9)
-         Fn_update_node_modules ;;
-        10)
-         Fn_update_all ;;
-        *)
-        clear
-        echo "Sorry, wrong selection";;
-    esac
-    echo -en "\n\n\t\t\tHit any key to continue"
-    read -n 1 line
-done
+# command case fn
+function runcommand {
+      case "$opt"  in
+          0)
+            break ;;
+          1)
+            Fn_run_dev
+            break ;;
+          2)
+            Fn_run_mock
+            break ;;
+          3)
+            Fn_run_prod
+            break ;;
+          4)
+            NODE_ENV=production npm_config_report=true Fn_run_prod ;;
+          5)
+#            Fn_run_lint
+            echo
+            echo
+            echo "developing..."
+            echo
+            break ;;
+          6)
+#            Fn_run_unit_test
+            echo
+            echo
+            echo "developing..."
+            echo
+            break ;;
+          7)
+#           Fn_run_e2e
+           echo
+           echo
+           echo "developing..."
+           echo
+           break ;;
+          8)
+#           Fn_run_unit_test && Fn_run_e2e
+           echo
+           echo
+           echo "developing..."
+           echo
+           break ;;
+          9)
+           Fn_update_node_modules ;;
+          10)
+           Fn_update_all ;;
+          *)
+          clear
+          echo "Sorry, wrong selection";;
+      esac
+}
+
+
+# judge parame and assign
+if [  -n "$1" ]
+   then
+    echo
+    echo "命令带有参数：$1，直接启动对应服务$1，请稍后..."
+    echo
+    echo
+      opt=${1};
+      runcommand
+   else
+      echo
+      echo "命令不带有参数, 启用操作菜单界面，请稍后..."
+      echo
+      echo
+      while [ 1 ]
+      do
+          menu
+          opt="$menuOption"
+          runcommand
+          echo -en "\n\n\t\t\tHit any key to continue"
+          read -n 1 line
+      done
+fi
