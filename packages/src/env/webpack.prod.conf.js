@@ -34,13 +34,11 @@ const prodWebpackConfig = merge(baseWebpackConfig, {
   mode: 'production',// 通过 mode 声明生产环境
   module: {},
   devtool: config.build.prodJsSourceMap ? config.build.devtool : false,
-
   output: {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash:8].js'),
     chunkFilename: utils.assetsPath('js/[name].[chunkhash:8].js')
   },
-
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
