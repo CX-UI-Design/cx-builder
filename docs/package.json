@@ -8,7 +8,8 @@
   "scripts": {
     "command:local": "./cx-builder/menu.sh",
     "command": "node_modules\\cx-builder\\lib\\menu.sh",
-    "command:mac": "node_modules/cx-builder/lib/menu.sh"
+    "command:mac": "node_modules/cx-builder/lib/menu.sh",
+    "command:docker": "bash node_modules/cx-builder/lib/menu.sh"
   },
   "files": [
     "build"
@@ -23,7 +24,7 @@
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
-    "cx-builder": "^0.0.2"
+    "cx-builder": "^0.0.8"
   },
   "engines": {
     "node": ">= 6.0.0",
