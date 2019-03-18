@@ -1,0 +1,48 @@
+{
+  "name": "cx-grid",
+  "version": "1.3.5",
+  "description": "grid component for CX-UI Design",
+  "author": "BroccoliSpring <Lensgcx@163.com>",
+  "license": "MIT",
+  "private": false,
+  "main": "dist/cx-grid.min.js",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production env_config=plugin node build/run/prod/run.prod.plugin",
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "start": "npm run dev",
+    "lint": "eslint --ext .js,.vue src",
+    "prod": "node build/build.js",
+    "clean": "rimraf ./dist/",
+    "analyz": "NODE_ENV=production npm_config_report=true npm run build",
+    "command": "node_modules/cx-builder/lib/menu.root.sh",
+    "command:mac": "node_modules/cx-builder/lib/menu.root.sh"
+  },
+  "keywords": [
+    "vue",
+    "vuejs",
+    "element",
+    "element-ui",
+    "grid",
+    "cx-grid",
+    "cx-grid.js",
+    "cx",
+    "table",
+    "CX-UI"
+  ],
+  "dependencies": {
+    "vuedraggable": "^2.14.1"
+  },
+  "devDependencies": {
+    "cx-builder": "^0.0.16",
+    "vue": "^2.5.21"
+  },
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
