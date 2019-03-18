@@ -5,9 +5,10 @@
 
 node_modules/
 dist/
-packages/
+builder/
 docs/
-
+docs-plugin/
+shell.backups/
 
 ##############################
 ## files                  ##
