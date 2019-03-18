@@ -6,6 +6,9 @@ const path = require('path');
 
 module.exports = {
   dev: {
+    entry: {
+      app: './src/main.js'
+    },
     // Paths
     assetsPublicPath: '/',// 编译发布的根目录，可配置为资源服务器域名或 CDN 域名
     assetsSubDirectory: 'static',// 编译输出的二级目录
@@ -45,8 +48,10 @@ module.exports = {
     // https://vue-loader.vuejs.org/en/options.html#cachebusting
     cacheBusting: true
   },
-
   build: {
+    entry: {
+      app: './src/main.js'
+    },
     // Template for index.html
     index: path.resolve(__dirname, './dist/index.html'),
     // Paths
@@ -75,7 +80,7 @@ module.exports = {
     /** Source Maps */
     prodCssSourceMap: false,// 是否开启 cssSourceMap
     prodJsSourceMap: false,// 是否开启 jsSourceMap
-
+    cacheBusting: true
   },
   base: {
     entry: {
@@ -90,8 +95,8 @@ module.exports = {
       {name: '@core', path: 'core'}
     ],
     sassResources: [
-      // path.resolve('packages/assets/css/Mixin/index.scss'),
-      // path.resolve('packages/assets/css/_var.scss')
+      // path.resolve('src/assets/css/Mixin/index.scss'),
+      // path.resolve('src/assets/css/_var.scss')
     ]
   }
 };
