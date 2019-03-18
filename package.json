@@ -1,6 +1,6 @@
 {
   "name": "cx-builder",
-  "version": "0.0.10",
+  "version": "0.0.17",
   "description": "cx-builder for build tools",
   "author": "BroccoliSpring <Lensgcx@163.com>",
   "private": false,
@@ -74,7 +74,6 @@
     "url-loader": "1.0.1",
     "vue-loader": "15.3.0",
     "vue-style-loader": "4.1.2",
-    "vue-template-compiler": "^2.5.21",
     "webpack": "4.16.5",
     "webpack-bundle-analyzer": "2.13.1",
     "webpack-cli": "3.1.0",
