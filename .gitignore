@@ -6,9 +6,14 @@
 node_modules/
 dist/
 lib/
+
 docs/dist/
 docs/node_modules/
 docs/cx-builder/
+
+docs-plugin/dist/
+docs-plugin/node_modules/
+docs-plugin/cx-builder/
 
 
 ##############################
