@@ -2,6 +2,7 @@
   <div id="app">
     <img src="./assets/img/logo.png">
     <router-view/>
+    <jsxtest></jsxtest>
     <div style="margin-top: 30px">
       <van-button type="default" @click="login()">登录</van-button>
       <van-button type="primary" @click="clickGET()">测试GET</van-button>
@@ -12,12 +13,14 @@
 </template>
 
 <script>
+  import jsxtest from './components/jsxtest.js'
   import qs from 'querystring';
   import insertService from './insertService';
   import test from '@core'
 
   export default {
     name: 'App',
+    components: {jsxtest},
     created() {
       const InsertService = new insertService();
       InsertService.insert();
