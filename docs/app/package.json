@@ -6,9 +6,9 @@
   "private": false,
   "main": "src/main.js",
   "scripts": {
-    "command:local": "./cx-builder/menu.sh",
     "command": "node_modules\\cx-builder\\lib\\menu.sh",
     "command:mac": "node_modules/cx-builder/lib/menu.sh",
+    "command:local": "./cx-builder/menu.sh",
     "command:docker": "bash node_modules/cx-builder/lib/menu.sh"
   },
   "files": [
