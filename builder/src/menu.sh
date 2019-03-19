@@ -40,10 +40,9 @@ function menu {
     echo -e "\t1. Run development"
     echo -e "\t2. Run mock"
     echo -e "\t3. Run production"
-    echo -e "\t4. Run production plugin"
-    echo -e "\t5. Run production analyz"
-    echo -e "\t6. Reload node_modules"
-    echo -e "\t7. Update all ns package"
+    echo -e "\t4. Run production analyz"
+    echo -e "\t5. Reload node_modules"
+    echo -e "\t6. Update all ns package"
     echo -e "\t0. Exit program\n\n"
     echo -en "\t\tEnter option: "
     read -n 1 menuOption
@@ -64,13 +63,10 @@ function runcommand {
             Fn_run_prod
             break ;;
           4)
-            Fn_run_prod_plugin
-            break ;;
-          5)
             NODE_ENV=production npm_config_report=true Fn_run_prod ;;
-          6)
+          5)
            Fn_update_node_modules ;;
-          7)
+          6)
            Fn_update_all ;;
           *)
           clear
