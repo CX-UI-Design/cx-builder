@@ -7,15 +7,10 @@
   "private": false,
   "main": "dist/cx-grid.min.js",
   "scripts": {
-    "build": "cross-env NODE_ENV=production env_config=plugin node build/run/prod/run.prod.plugin",
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
-    "lint": "eslint --ext .js,.vue src",
-    "prod": "node build/build.js",
-    "clean": "rimraf ./dist/",
-    "analyz": "NODE_ENV=production npm_config_report=true npm run build",
     "command": "node_modules/cx-builder/lib/menu.root.sh",
-    "command:mac": "node_modules/cx-builder/lib/menu.root.sh"
+    "command:mac": "node_modules/cx-builder/lib/menu.root.sh",
+    "clean": "rimraf ./dist/",
+    "build": "cross-env NODE_ENV=production env_config=plugin node node_modules/cx-builder/lib/run/prod/run.prod.plugin"
   },
   "keywords": [
     "vue",
