@@ -36,7 +36,8 @@ exports.getPropertyByEnv = (prop) => {
     return config[env][prop] || config['base'][prop];
   }
   catch (e) {
-    throw 'Missing dev, build or base attribute in env.param.config file, find it.'
+    console.log(e);
+    throw 'Missing dev, build, plugin or base attribute in env.param.config file, find it.'
   }
 };
 
