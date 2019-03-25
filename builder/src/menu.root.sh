@@ -42,12 +42,13 @@ function rootmenu {
     echo -e "\t3. Run production"
     echo -e "\t4. Run production plugin"
     echo -e "\t5. Run production analyz"
-    echo -e "\t6. Reload node_modules"
-    echo -e "\t7. Update all ns package"
-    echo -e "\t8. Run lint"
-    echo -e "\t9. Run unit test"
-    echo -e "\t10. Run e2e test"
-    echo -e "\t11. Run test"
+    echo -e "\t6. Run prettier code"
+    echo -e "\t7. Reload node_modules"
+    echo -e "\t8. Update all ns package"
+    echo -e "\t9. Run lint"
+    echo -e "\t10. Run unit test"
+    echo -e "\t11. Run e2e test"
+    echo -e "\t12. Run test"
     echo -e "\t0. Exit program\n\n"
     echo -en "\t\tEnter option: "
     read -n 1 menuOption
@@ -73,31 +74,33 @@ function runcommand {
           5)
             NODE_ENV=production npm_config_report=true Fn_run_prod ;;
           6)
-           Fn_update_node_modules ;;
+           Fn_run_prettier ;;
           7)
-           Fn_update_all ;;
+           Fn_update_node_modules ;;
           8)
+           Fn_update_all ;;
+          9)
 #            Fn_run_lint
             echo
             echo
             echo "developing..."
             echo
             break ;;
-          9)
+          10)
 #            Fn_run_unit_test
             echo
             echo
             echo "developing..."
             echo
             break ;;
-          10)
+          11)
 #           Fn_run_e2e
            echo
            echo
            echo "developing..."
            echo
            break ;;
-          11)
+          12)
 #           Fn_run_unit_test && Fn_run_e2e
            echo
            echo
