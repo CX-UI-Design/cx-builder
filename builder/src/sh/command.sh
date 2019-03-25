@@ -29,6 +29,13 @@ function Fn_run_prod {
 function Fn_run_prod_plugin {
   cross-env NODE_ENV=production env_config=plugin node ${base_path}/run/prod/run.prod.plugin${min_suffix}.js
 }
+
+#5、run prettier code
+function Fn_run_prettier {
+  cross-env node ${base_path}/prettier/prettier${min_suffix}.js
+}
+
+
 ##5、run lint
 #function Fn_run_lint {
 #  eslint --ext .js,.vue src ${base_path}/test/unit ${base_path}/test/e2e/specs
