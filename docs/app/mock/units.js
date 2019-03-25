@@ -5,6 +5,6 @@ const path = require('path');
  * @param filePath
  * @returns {any}
  */
-exports.getJsonFile = function (filePath) {
+exports.getJsonFile = function(filePath) {
   return JSON.parse(fs.readFileSync(path.resolve(__dirname, './data/' + filePath), 'utf-8'));
 };
