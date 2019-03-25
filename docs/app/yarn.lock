@@ -2345,10 +2345,10 @@ currently-unhandled@^0.4.1:
   dependencies:
     array-find-index "^1.0.1"
 
-cx-builder@^0.0.17:
-  version "0.0.17"
-  resolved "https://registry.npmjs.org/cx-builder/-/cx-builder-0.0.17.tgz#3cc2c20bec8f2544251064f71b92551f0d433213"
-  integrity sha512-+U1RSGbfL7RjY9GaIyiaHfJMLIC8tDhkrDdASzxCqN+hjMbdmijgn3CGocX5As6Ar/uPF+82GUPo2RpwAHxqZg==
+cx-builder@^0.0.19:
+  version "0.0.19"
+  resolved "https://registry.npmjs.org/cx-builder/-/cx-builder-0.0.19.tgz#613411de12784cb297b39dfba6c8a85c0577ae89"
+  integrity sha512-stJo03w3S/pdM5AppPxI7W6LrwsL6auP0WKoj1FV3jkraX/RQhj+IQYDLsjD/IPXCU2nUY73lg4nVUcaZIGBvw==
   dependencies:
     "@babel/core" "^7.2.2"
     "@babel/helper-module-imports" "^7.0.0"
@@ -2398,6 +2398,7 @@ cx-builder@^0.0.17:
     postcss-import "11.1.0"
     postcss-loader "2.1.6"
     postcss-url "7.3.2"
+    prettier "^1.16.4"
     rimraf "2.6.2"
     sass-loader "^7.1.0"
     sass-resources-loader "^2.0.0"
@@ -6198,6 +6199,11 @@ prettier@1.16.3:
   version "1.16.3"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.16.3.tgz#8c62168453badef702f34b45b6ee899574a6a65d"
   integrity sha512-kn/GU6SMRYPxUakNXhpP0EedT/KmaPzr0H5lIsDogrykbaxOpOfAFfk5XA7DZrJyMAv1wlMV3CPcZruGXVVUZw==
+
+prettier@^1.16.4:
+  version "1.16.4"
+  resolved "https://registry.npmjs.org/prettier/-/prettier-1.16.4.tgz#73e37e73e018ad2db9c76742e2647e21790c9717"
+  integrity sha512-ZzWuos7TI5CKUeQAtFd6Zhm2s6EpAD/ZLApIhsF9pRvRtM1RFo61dM/4MSRUA0SuLugA/zgrZD8m0BaY46Og7g==
 
 pretty-error@^2.0.2:
   version "2.1.1"
