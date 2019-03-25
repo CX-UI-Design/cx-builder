@@ -41,8 +41,9 @@ function menu {
     echo -e "\t2. Run mock"
     echo -e "\t3. Run production"
     echo -e "\t4. Run production analyz"
-    echo -e "\t5. Reload node_modules"
-    echo -e "\t6. Update all ns package"
+    echo -e "\t5. Run prettier code"
+    echo -e "\t6. Reload node_modules"
+    echo -e "\t7. Update all ns package"
     echo -e "\t0. Exit program\n\n"
     echo -en "\t\tEnter option: "
     read -n 1 menuOption
@@ -65,8 +66,10 @@ function runcommand {
           4)
             NODE_ENV=production npm_config_report=true Fn_run_prod ;;
           5)
-           Fn_update_node_modules ;;
+           Fn_run_prettier ;;
           6)
+           Fn_update_node_modules ;;
+          7)
            Fn_update_all ;;
           *)
           clear
