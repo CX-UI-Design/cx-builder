@@ -97,6 +97,9 @@ module.exports = {
     sassResources: [
       // path.resolve('src/assets/css/Mixin/index.scss'),
       // path.resolve('src/assets/css/_var.scss')
-    ]
+    ],
+    prettier: {
+      files: ['mock/**/*.js']
+    }
   }
 };
