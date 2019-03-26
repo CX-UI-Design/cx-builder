@@ -9,7 +9,9 @@
     "command": "node_modules\\cx-builder\\lib\\menu.sh",
     "command:mac": "node_modules/cx-builder/lib/menu.sh",
     "command:local": "./cx-builder/menu.sh",
-    "command:docker": "bash node_modules/cx-builder/lib/menu.sh"
+    "command:docker": "bash node_modules/cx-builder/lib/menu.sh",
+    "command:mac-root": "node_modules/cx-builder/lib/menu.sh root",
+    "lint": "eslint --ext .js --ext .jsx --ext .ts --ext .tsx --ext .vue src mock"
   },
   "files": [
     "build"
@@ -24,7 +26,7 @@
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
-    "cx-builder": "^0.0.19",
+    "cx-builder": "^0.0.28",
     "vue-template-compiler": "^2.5.21"
   },
   "engines": {
@@ -35,5 +37,18 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "lint-staged": {
+    "**/*.{js,json,jsx,less}": [
+      "node node_modules/cx-builder/lib/prettier/lint-prettier.js",
+      "git add"
+    ],
+    "**/*.{js,jsx}": "eslint --ext .js",
+    "**/*.{less,scss,sass}": "stylelint --syntax less"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }
