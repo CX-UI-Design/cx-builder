@@ -11,7 +11,7 @@
     "command:local": "./cx-builder/menu.sh",
     "command:docker": "bash node_modules/cx-builder/lib/menu.sh",
     "command:mac-root": "node_modules/cx-builder/lib/menu.sh root",
-    "lint": "eslint --ext .js --ext .jsx --ext .ts --ext .tsx --ext .vue src mock"
+    "test": "node node_modules/cx-builder/lib/prettier/lint-prettier.js"
   },
   "files": [
     "build"
@@ -39,12 +39,12 @@
     "not ie <= 8"
   ],
   "lint-staged": {
-    "**/*.{js,json,jsx,less}": [
+    "src/**/*.{js,json,jsx,less},mock/**/*.{js,json,jsx,less}": [
       "node node_modules/cx-builder/lib/prettier/lint-prettier.js",
       "git add"
     ],
-    "**/*.{js,jsx}": "eslint --ext .js",
-    "**/*.{less,scss,sass}": "stylelint --syntax less"
+    "src/**/*.{js,jsx}": "eslint --ext .js",
+    "src/**/*.{less,scss,sass}": "stylelint --syntax less"
   },
   "husky": {
     "hooks": {
