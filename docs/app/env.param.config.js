@@ -96,7 +96,19 @@ module.exports = {
       // path.resolve('src/assets/css/_var.scss')
     ],
     prettier: {
-      files: ['mock/**/*.js', '*.js'],
+
+
+      files: [
+        'mock/**/*.js',
+        '.postcssrc.js',,xx
+
+
+
+
+        'env.config.js',
+        'env.param.config.js',
+        '.eslintrc.js'
+      ],
     },
   },
 };
