@@ -6,10 +6,14 @@ const isDev = process.env.NODE_ENV === "development";
 
 
 const createLintingRule = () => ({
-  test: /\.(js|vue)$/,
+  test: /\.(js|jsx|ts|tsx|vue)$/,
   loader: 'eslint-loader',
+  /**因为.vue文件已经被vue-loader处理过了，而eslint-loader只是做代码检测，肯定不能让它去默认处理.vue文件。
+   * 我们希望vue-loader在处理.vue文件之前，让eslint-loader先进行一次代码检测。
+   * 如果代码检测都通过不了的话，那么vue-loader就不需要处理了，直接报错就OK了。所以需要加上 enforce: 'pre'，这叫预处理。
+   **/
   enforce: 'pre',
-  include: [utils.rootPath('src'), utils.rootPath('test')],// 指定检查的目录
+  include: [utils.rootPath('src'), utils.rootPath('mock')],// 指定检查的目录
   // 这里的配置项参数将会被传递到 eslint 的 CLIEngine
   options: {
     formatter: require('eslint-friendly-formatter'),// 指定错误报告的格式规范
