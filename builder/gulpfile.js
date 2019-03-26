@@ -40,7 +40,7 @@ gulp.task('js-handle', function () {
 
 // copy sh
 gulp.task('copy_sh', function () {
-  gulp.src([_base_path + 'menu.sh', _base_path + 'menu.root.sh'])
+  gulp.src([_base_path + 'menu.sh'])
     .pipe(gulp.dest(_base_dist_path))
     .pipe(notify({message: '===== menu.sh copy complete ====='}));
   gulp.src(_base_path + 'sh/**/*.*')
