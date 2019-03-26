@@ -9,9 +9,9 @@
  * 6、eslint-loader                - 要使webpack支持eslint，就要要安装 eslint-loader
  * 7、eslint-plugin-import
  * 8、eslint-plugin-promise
- * 9、eslint-plugin-vue            - vue 项目
+ * 9、eslint-plugin-vue             - vue 项目
  * 10、eslint-plugin-node           - node
- * 11、eslint-plugin-html           - html 项目 可选******
+ * 11、eslint-plugin-html           - html 项目 可选 ******
  */
 
 module.exports = {
@@ -26,13 +26,13 @@ module.exports = {
      */
     parser: 'babel-eslint',
     //默认为script
-    sourceType: "module",
+    sourceType: 'module',
   },
   //代码运行的环境，每个环境都会有一套预定义的全局对象，不同环境可以组合使用
   env: {
     browser: true,
     node: true,
-    es6: true
+    es6: true,
   },
   /**
    * 1、使用第三方分享的，我们一般需要安装相关的插件代码如下:
@@ -47,12 +47,10 @@ module.exports = {
     // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
     'plugin:vue/essential',
     // https://github.com/standard/standard/blob/master/docs/RULES-en.md
-    'standard'
+    'standard',
   ],
   // required to lint *.vue files
-  plugins: [
-    'vue'
-  ],
+  plugins: ['vue'],
   /**
    * 这个插件将会提醒模块脚本之间模拟浏览器共享全局变量的行为，因为这不适用于模块脚本。
    * 这个插件也可以扩展文件，如：.vue，.jsx
@@ -67,6 +65,6 @@ module.exports = {
     // allow async-await
     'generator-star-spacing': 'off',
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
-  }
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+  },
 };
