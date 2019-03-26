@@ -39,12 +39,12 @@
     "not ie <= 8"
   ],
   "lint-staged": {
-    "src/**/*.{js,json,jsx,less},mock/**/*.{js,json,jsx,less}": [
+    "**/*.{js,json,jsx,less}": [
       "node node_modules/cx-builder/lib/prettier/lint-prettier.js",
       "git add"
     ],
-    "src/**/*.{js,jsx}": "eslint --ext .js",
-    "src/**/*.{less,scss,sass}": "stylelint --syntax less"
+    "**/*.{js,jsx}": "eslint --ext .js",
+    "**/*.{less,scss,sass}": "stylelint --syntax less"
   },
   "husky": {
     "hooks": {
