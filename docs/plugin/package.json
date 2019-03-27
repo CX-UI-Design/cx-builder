@@ -7,8 +7,8 @@
   "private": false,
   "main": "dist/cx-grid.min.js",
   "scripts": {
-    "command": "node_modules/cx-builder/lib/menu.root.sh",
-    "command:mac": "node_modules/cx-builder/lib/menu.root.sh",
+    "command": "node_modules/cx-builder/lib/menu.sh root",
+    "command:mac": "node_modules/cx-builder/lib/menu.sh root",
     "clean": "rimraf ./dist/",
     "build": "cross-env NODE_ENV=production env_config=plugin node node_modules/cx-builder/lib/run/prod/run.prod.plugin"
   },
@@ -25,11 +25,12 @@
     "CX-UI"
   ],
   "dependencies": {
-    "vuedraggable": "^2.14.1"
+    "vuedraggable": "^2.14.1",
+    "vue": "2.5.21"
   },
   "devDependencies": {
-    "cx-builder": "^0.0.16",
-    "vue": "^2.5.21"
+    "cx-builder": "^0.0.28",
+    "vue-template-compiler": "2.5.21"
   },
   "engines": {
     "node": ">= 6.0.0",
@@ -39,5 +40,22 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "lint-staged": {
+    "src/**/*.{js,json,jsx,less}": [
+      "node node_modules/cx-builder/lib/prettier/lint-prettier.js",
+      "git add"
+    ],
+    "mock/**/*.{js,json}": [
+      "node node_modules/cx-builder/lib/prettier/lint-prettier.js",
+      "git add"
+    ],
+    "src/*.{js,jsx}": "eslint --ext .js",
+    "src/*.{less,scss,sass}": "stylelint --syntax less"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }
