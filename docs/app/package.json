@@ -10,8 +10,7 @@
     "command:mac": "node_modules/cx-builder/lib/menu.sh",
     "command:local": "./cx-builder/menu.sh",
     "command:docker": "bash node_modules/cx-builder/lib/menu.sh",
-    "command:mac-root": "node_modules/cx-builder/lib/menu.sh root",
-    "test": "node node_modules/cx-builder/lib/prettier/lint-prettier.js"
+    "command:mac-root": "node_modules/cx-builder/lib/menu.sh root"
   },
   "files": [
     "build"
