@@ -33,8 +33,15 @@ module.exports = {
     aliasPath: [
       {name: '@core', path: 'core'}
     ],
-    sassResources: [
-
-    ]
+    sassResources: [],
+    prettier: {
+      files: [
+        'mock/**/*.js',
+        '.postcssrc.js',
+        'env.config.js',
+        'env.param.config.js',
+        '.eslintrc.js'
+      ],
+    },
   }
 };
