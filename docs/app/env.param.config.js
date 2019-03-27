@@ -90,21 +90,15 @@ module.exports = {
       type: 'less',
       theme: require(path.resolve('src/assets/css/Theme/normal')),
     },
-    aliasPath: [{ name: '@core', path: 'core' }],
+    aliasPath: [{name: '@core', path: 'core'}],
     sassResources: [
       // path.resolve('src/assets/css/Mixin/index.scss'),
       // path.resolve('src/assets/css/_var.scss')
     ],
     prettier: {
-
-
       files: [
         'mock/**/*.js',
-        '.postcssrc.js',,xx
-
-
-
-
+        '.postcssrc.js',
         'env.config.js',
         'env.param.config.js',
         '.eslintrc.js'
