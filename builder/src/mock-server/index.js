@@ -1,15 +1,32 @@
-const Mock = require('mockjs');
-const utils = require('../utils');
+const path = require('path');
 const bodyParser = require('body-parser');
-const apiConfig = require(utils.rootPath('./mock/index'));
+const config = require(path.resolve('env.param.config'));
+const mockPath = config.base.mockPath || './mock';
+
+/**
+ * 注入 mock 路径下所有配置文件
+ * https://www.npmjs.com/package/require-all
+ */
+const controllers = require('require-all')({
+  dirname: path.resolve(mockPath),
+});
+
+//将注入的对象取value转换为数组
+const mockModule = Object.values(controllers) || [];
+console.log(mockModule);
 
 module.exports = function (app) {
+
   app.use(bodyParser.urlencoded({extended: false}));
   app.use(bodyParser.json());
-  apiConfig.api.forEach(_conf => {
-    app[_conf.method](_conf.path, _conf.callback ? _conf.callback : function (rep, res) {
-      var json = utils.getJsonFile(_conf.dataFile);
-      res.json(Mock.mock(json));
-    })
-  });
+
+  mockModule.forEach(module => {
+    Object.keys(module).forEach(key => {
+      const _method = key.split(' ')[0].toLowerCase();//mock 请求方法
+      const _url = key.split(' ')[1];//mock 请求地址
+      const _callback = module[key];//mock 回调函数
+      console.log(_method, _url);
+      app[_method](_url, _callback);
+    });
+  })
 };
