@@ -4,6 +4,9 @@ const vueLoaderConfig = require('./vue-loader.conf');
 
 const isDev = process.env.NODE_ENV === "development";
 
+let JSinclude = [...config.base.JSinclude, ...['node_modules/webpack-dev-server/client']];
+JSinclude = JSinclude.map(src => utils.rootPath(src));
+
 
 const createLintingRule = () => ({
   test: /\.(js|jsx|ts|tsx|vue)$/,
@@ -13,7 +16,7 @@ const createLintingRule = () => ({
    * 如果代码检测都通过不了的话，那么vue-loader就不需要处理了，直接报错就OK了。所以需要加上 enforce: 'pre'，这叫预处理。
    **/
   enforce: 'pre',
-  include: [utils.rootPath('src'), utils.rootPath('mock')],// 指定检查的目录
+  include: JSinclude,// 指定检查的目录
   // 这里的配置项参数将会被传递到 eslint 的 CLIEngine
   options: {
     formatter: require('eslint-friendly-formatter'),// 指定错误报告的格式规范
@@ -21,6 +24,9 @@ const createLintingRule = () => ({
     emitWarning: isDev ? !config.dev.showEslintErrorsInOverlay : false
   }
 });
+
+
+
 
 const rules = [
   ...(utils.getPropertyByEnv('useEslint') ? [createLintingRule()] : []),
@@ -32,7 +38,7 @@ const rules = [
   {
     test: /\.js$/,
     loader: 'babel-loader?cacheDirectory',
-    include: [utils.rootPath('src'), utils.rootPath('test'), utils.rootPath('node_modules/webpack-dev-server/client')]
+    include: JSinclude
   },
   {
     test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
