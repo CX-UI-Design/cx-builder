@@ -229,9 +229,10 @@ exports.getAliasPathConfig = function () {
   };
   try {
     config.base.aliasPath.forEach(info => {
-      if (!aliasPath.hasOwnProperty(info.name)) {
-        aliasPath[info.name] = path.resolve(info.path)
-      }
+      // if (!aliasPath.hasOwnProperty(info.name)) {
+      //   aliasPath[info.name] = path.resolve(info.path)
+      // }
+      aliasPath[info.name] = path.resolve(info.path)
     });
     return aliasPath;
   }
