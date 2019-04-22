@@ -68,7 +68,7 @@ const prodWebpackConfig = merge(baseWebpackConfig, {
       filename: process.env.NODE_ENV === 'testing'
         ? 'index.html'
         : config.build.index,
-      template: 'index.html',
+      template: utils.getPropertyByEnv('templateSPA'),
       inject: true,
       favicon: config.build.favicon,
       minify: {
@@ -108,7 +108,7 @@ const prodWebpackConfig = merge(baseWebpackConfig, {
     // copy custom static assets
     new CopyWebpackPlugin([
       {
-        from: utils.rootPath('./static'),//path.resolve(__dirname, '../../static'),
+        from: utils.rootPath(utils.getPropertyByEnv('staticPath')),//path.resolve(__dirname, '../../static'),
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
