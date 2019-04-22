@@ -8,7 +8,7 @@ dist/
 builder/
 docs/
 docs-plugin/
-shell.backups/
+builder.backups/
 
 ##############################
 ## files                  ##
