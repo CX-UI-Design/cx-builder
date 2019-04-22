@@ -85,14 +85,13 @@ const devWebpackConfig = {
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'index.html',
+      template: utils.getPropertyByEnv('templateSPA'),
       inject: true
     }),
     // copy custom static assets
     new CopyWebpackPlugin([
       {
-
-        from: utils.rootPath('./static'),
+        from: utils.rootPath(utils.getPropertyByEnv('staticPath')),
         to: config.dev.assetsSubDirectory,
         ignore: ['.*']
       }
