@@ -1,8 +1,11 @@
 <template>
   <div id="app">
     <img src="./assets/img/logo.png">
+    <img src="./assets/img/null.png">
+    <div class="img"></div>
     <router-view/>
     <jsxtest></jsxtest>
+    <testContent></testContent>
     <div style="margin-top: 30px">
       <van-button type="default" @click="login()">登录</van-button>
       <van-button type="primary" @click="clickGET()">测试GET</van-button>
@@ -14,13 +17,14 @@
 
 <script>
   import jsxtest from './components/jsxtest.js'
+  import testContent from './components/testContent.js'
   import qs from 'querystring';
   import insertService from './insertService';
   import test from '@core'
 
   export default {
     name: 'App',
-    components: {jsxtest},
+    components: {jsxtest, testContent},
     created() {
       const InsertService = new insertService();
       InsertService.insert();
@@ -84,5 +88,10 @@
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
+    .img {
+      width: 200px;
+      height: 200px;
+      background-image: url("./assets/img/error.png");
+    }
   }
 </style>
