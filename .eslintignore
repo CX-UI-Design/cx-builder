@@ -1,6 +1,5 @@
-/build/
-/config/
+/builder/
+/docs/
 /lib/
-/packages/
 /*.js
 /test/unit/coverage/
