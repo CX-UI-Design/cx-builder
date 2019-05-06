@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var uglify = require('gulp-uglify');
 var babel = require('gulp-babel');
+var sourcemaps = require('gulp-sourcemaps');
 var rename = require('gulp-rename');
 var replace = require('gulp-replace');
 var gutil = require('gulp-util');
@@ -25,11 +26,13 @@ var showinfo = function () {
 
 gulp.task('js-handle', function () {
   gulp.src(_base_path + '**/*.js')
+    .pipe(sourcemaps.init())
     .pipe(babel())
     .pipe(uglify({
       mangle: true,
       compress: true
     }))
+    .pipe(sourcemaps.write())
     // .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest(_base_dist_path))
     .on('error', function (err) {
