@@ -10,8 +10,8 @@ const chalk = require('chalk');
 const webpack = require('webpack');
 
 const utils = require('../../utils');
-const config = require(utils.rootPath('env.param.config'));
 
+console.log('\n');
 const spinner = ora('building for production...');
 spinner.start();
 
