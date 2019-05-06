@@ -2,11 +2,11 @@ const chalk = require('chalk');
 const run_dev = require('./run.dev');
 const run_build = require('./run.build');
 
-var env = process.env.env_config;
+const runenv = process.env.env_config;
 
-console_text(env);
+console_text(runenv);
 
-module.exports = env === 'dev' || env === 'mock' ? run_dev : run_build;
+module.exports = runenv === 'dev' || runenv === 'mock' ? run_dev : run_build;
 
 
 /**
