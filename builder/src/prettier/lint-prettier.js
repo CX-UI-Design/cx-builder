@@ -7,7 +7,7 @@
  */
 const path = require('path');
 
-const config = require(path.resolve('env.param.config'));
+const config = require('../config');
 
 const glob = require('glob');
 const prettier = require('prettier');
