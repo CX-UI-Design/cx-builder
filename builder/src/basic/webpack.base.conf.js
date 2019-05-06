@@ -1,27 +1,35 @@
-'use strict';
-const webpack = require('webpack');
-const {VueLoaderPlugin} = require('vue-loader');
-const utils = require('../utils');
-const config = require(utils.rootPath('env.param.config'));
+"use strict";
+const webpack = require("webpack");
+/**
+ * 如果 vue-loader 的版本在v15以上，还需要额外配置VueLoaderPlugin
+ * 因 vue-loader 版本在 v15以上运行报错 ：Cannot find module 'vue-template-compiler'，且配置 new VueLoaderPlugin()无效。
+ * 故而降低 vue-loader 版本至 14.2.2
+ */
+// const { VueLoaderPlugin } = require("vue-loader");
+// const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const utils = require("../utils");
+const config = require("../config");
 const rules = require("./webpack.rules.conf.js");
 
 module.exports = {
-  context: utils.rootPath(''),//path.resolve(__dirname, '../')
-  entry: utils.getPropertyByEnv('entry'),
+  context: utils.rootPath(""),//path.resolve(__dirname, '../')
+  entry: utils.getPropertyByEnv("entry"),
   output: {
-    path: utils.getPropertyByEnv('assetsRoot'),
-    filename: '[name].js',
-    publicPath: utils.getPropertyByEnv('assetsPublicPath')
+    path: utils.getPropertyByEnv("assetsRoot"),
+    filename: "[name].js",
+    publicPath: utils.getPropertyByEnv("assetsPublicPath")
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
-    alias: utils.getAliasPathConfig()
+    //指定extension之后可以不用在require或是import的时候加文件扩展名,会依次尝试添加扩展名进行匹配
+    extensions: config.base.extensions,
+    //配置别名可以加快webpack查找模块的速度
+    alias: config.base.alias
   },
   module: {
     rules: [...rules]
   },
   plugins: [
-    new VueLoaderPlugin(),
+    // new VueLoaderPlugin(),
     new webpack.ProvidePlugin({
       jQuery: "jquery",
       $: "jquery"
@@ -33,10 +41,10 @@ module.exports = {
     setImmediate: false,
     // prevent webpack from injecting mocks to Node native modules
     // that does not make sense for the client
-    dgram: 'empty',
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty',
-    child_process: 'empty'
+    dgram: "empty",
+    fs: "empty",
+    net: "empty",
+    tls: "empty",
+    child_process: "empty"
   }
 };
