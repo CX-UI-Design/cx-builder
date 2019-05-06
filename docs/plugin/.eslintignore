@@ -1,6 +1,5 @@
-#/mock/
-/core/
-/build/
+/mock/
+/src/
 /dist/
-#/src/
-
+env.param.config.js
+babel.config.js
