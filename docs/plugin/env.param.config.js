@@ -1,47 +1,37 @@
-'use strict';
-// Template version: 1.3.1
-// see http://vuejs-templates.github.io/webpack for documentation.
+"use strict";
 
-const path = require('path');
+
+const path = require("path");
 
 module.exports = {
   plugin: {
-    entry: {
-      app: './src/index.js'
-    },
-    outputFilename: 'cx-grid',
-    outputLibrary: 'CxGrid',
+    // entry config
+    entry: "./src/index.js",
+
+    // Output config
+    outputLibrary: "cx-grid",//output file/Library name
+    libraryTarget: "umd",
+    filename: "cx-grid.min.js",
+    isMinify: true,//是否压缩
+
     // Paths
-    assetsPublicPath: './', // 编译发布的根目录，可配置为资源服务器域名或 CDN 域名
-    assetsRoot: path.resolve(__dirname, './dist'),// 编译输出的静态资源路径
-    assetsSubDirectory: 'static',// 编译输出的二级目录
-    devtool: '#source-map',
-    // Run the build command with an extra argument to
-    // View the bundle analyzer report after build finishes:
-    // `npm run build --report`
-    // Set to `true` or `false` to always turn it on or off
-    bundleAnalyzerReport: process.env.npm_config_report || false,
-    extract: true,//是否需要分离出js中的css代码,然后分别进行打包
-    usePostCSS: true,//补全css代码的兼容性前缀
-    useEslint: false,
-    /** Source Maps */
-    prodCssSourceMap: false,// 是否开启 cssSourceMap
-    prodJsSourceMap: false,// 是否开启 jsSourceMap
-    cacheBusting: true
+    assetsPublicPath: "./", // 编译发布的根目录，可配置为资源服务器域名或 CDN 域名
+    assetsRoot: path.resolve("./dist"),// 编译输出的静态资源路径
+    assetsSubDirectory: "static",// 编译输出的二级目录
+    staticPath: "./static"//静态文件抽取static所在路径
   },
+
   base: {
-    aliasPath: [
-      {name: '@core', path: 'core'}
-    ],
-    sassResources: [],
+
     prettier: {
+      switch: true,
       files: [
-        'mock/**/*.js',
-        '.postcssrc.js',
-        'env.config.js',
-        'env.param.config.js',
-        '.eslintrc.js'
-      ],
-    },
+        "mock/**/*.js",
+        ".postcssrc.js",
+        "env.config.js",
+        "env.param.config.js",
+        ".eslintrc.js"
+      ]
+    }
   }
 };
