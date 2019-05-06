@@ -1,15 +1,14 @@
 {
-  "name": "cx-vue-webpck-cli-demo",
+  "name": "cx-builder-APP-demo",
   "version": "0.0.1",
   "description": "Demo ( cx-vue-webpck-cli for build tools ）",
   "author": "BroccoliSpring <Lensgcx@163.com>",
   "private": false,
   "main": "src/main.js",
   "scripts": {
+    "command:local":"../../builder/src/menu.sh root 2",
     "command": "node_modules\\cx-builder\\lib\\menu.sh",
-    "command:mac": "node_modules/cx-builder/lib/menu.sh",
-    "command:local": "./cx-builder/menu.sh",
-    "command:docker": "bash node_modules/cx-builder/lib/menu.sh",
+    "command:mac": "node_modules/cx-builder/lib/menu.sh developer 2",
     "command:mac-root": "node_modules/cx-builder/lib/menu.sh root"
   },
   "files": [
@@ -21,12 +20,12 @@
     "element-ui": "^2.4.11",
     "mockjs": "^1.0.1-beta3",
     "vant": "^1.4.8",
-    "vue": "^2.5.21",
+    "vue": "2.5.21",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
-    "cx-builder": "^0.0.28",
-    "vue-template-compiler": "^2.5.21"
+    "cx-builder": "^0.0.42",
+    "vue-template-compiler": "2.5.21"
   },
   "engines": {
     "node": ">= 6.0.0",
