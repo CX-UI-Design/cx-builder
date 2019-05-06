@@ -1,20 +1,19 @@
 /**
  * utils - 为整个脚手架提供方法
  */
-'use strict';
-const fs = require('fs');//引入文件系统模块
-const path = require('path');//path模块提供了用于处理文件和目录路径的使用工具
-const chalk = require('chalk');
-const config = require(path.resolve('env.param.config'));
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const packageConfig = require('../../package.json');
+"use strict";
+
+const path = require("path");//path模块提供了用于处理文件和目录路径的使用工具
+const config = require("../config");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const packageConfig = require("../../package.json");
 
 /**
  * root path
  * @param _path
  * @returns {void | * | {extensions, alias} | Promise<void> | Promise<any>}
  */
-exports.rootPath = function (_path) {
+exports.rootPath = function(_path) {
   return path.resolve(_path);
 };
 
@@ -26,20 +25,21 @@ exports.rootPath = function (_path) {
  */
 exports.getPropertyByEnv = (prop) => {
   const envConfMap = {
-    dev: 'dev',
-    mock: 'dev',
-    prod: 'build',
-    plugin: 'plugin',
+    dev: "dev",
+    mock: "dev",
+    prod: "prod",
+    plugin: "plugin"
   };
   const env = envConfMap[process.env.env_config];
   try {
-    return config[env][prop] || config['base'][prop];
+    return config[env][prop];
   }
   catch (e) {
     console.log(e);
-    throw 'Missing dev, build, plugin or base attribute in env.param.config file, find it.'
+    throw "Missing dev, mock, build, plugin or base attribute in env.param.config / default file, find it.";
   }
 };
+
 
 /**
  * assetsPath
@@ -48,12 +48,12 @@ exports.getPropertyByEnv = (prop) => {
  * @param _path  接受一个_path参数
  * @returns {*|string} 返回static目录位置拼接的路径
  */
-exports.assetsPath = function (_path) {
-  const assetsSubDirectory = process.env.NODE_ENV === 'production'
-    ? this.getPropertyByEnv('assetsSubDirectory')
+exports.assetsPath = function(_path) {
+  const assetsSubDirectory = process.env.NODE_ENV === "production"
+    ? this.getPropertyByEnv("assetsSubDirectory")
     : config.dev.assetsSubDirectory;
 
-  return path.posix.join(assetsSubDirectory, _path)
+  return path.posix.join(assetsSubDirectory, _path);
 };
 
 /**
@@ -61,11 +61,11 @@ exports.assetsPath = function (_path) {
  * @param options   接受一个options参数，参数还有的属性：sourceMap、usePostCSS。
  * @returns {{css: *, postcss: *, less: *, sass: *, scss: *, stylus: *, styl: *}}
  */
-exports.cssLoaders = function (options) {
+exports.cssLoaders = function(options) {
   options = options || {};
 
   const cssLoader = {
-    loader: 'css-loader',
+    loader: "css-loader",
     options: {
       sourceMap: options.sourceMap
     }
@@ -73,7 +73,7 @@ exports.cssLoaders = function (options) {
 
   //是否需要补全css代码的兼容性前缀配置，需要的话把 postcssLoader 注入
   const postcssLoader = {
-    loader: 'postcss-loader',
+    loader: "postcss-loader",
     options: {
       sourceMap: options.sourceMap
     }
@@ -94,38 +94,38 @@ exports.cssLoaders = function (options) {
     /*  此项目中，development 时不分离， production 时 分离                                      */
     /*----------------------------------------------------------------------------------------*/
     if (options.extract) {
-      loaders.push(MiniCssExtractPlugin.loader)
+      loaders.push(MiniCssExtractPlugin.loader);
     } else {
-      loaders.push('vue-style-loader')
+      loaders.push("vue-style-loader");
     }
 
     loaders.push(cssLoader);
 
     if (options.usePostCSS) {
-      loaders.push(postcssLoader)
+      loaders.push(postcssLoader);
     }
 
     //注入loader的相关配置
     if (loader) {
       loaders.push({
-        loader: loader + '-loader',
+        loader: loader + "-loader",
         options: Object.assign({}, loaderOptions, {
           sourceMap: options.sourceMap
         })
-      })
+      });
     }
 
     //sass-resources-loader 在webpack4中暂时无更新，故而无法使用
-    const sassResources = config.base ? config.base.sassResources : [];
-    if (sassResources.length !== 0 && loader === 'sass') {
+    const sassResources = config.base.sassResources;
+    if (sassResources.length !== 0 && loader === "sass") {
       loaders.push({
-        loader: 'sass-resources-loader',
+        loader: "sass-resources-loader",
         options: {
           resources: sassResources
         }
-      })
+      });
     }
-    return loaders
+    return loaders;
   }
 
   /**
@@ -135,16 +135,16 @@ exports.cssLoaders = function (options) {
    */
   function useModifyVars(type) {
     try {
-      const themeConfig = config.base.themeConfig;
-      if (themeConfig.type === type) {
-        return themeConfig.switch ? {modifyVars: themeConfig.theme} : {}
+      const mixinPalette = config.base.mixinPalette;
+      if (mixinPalette.type === type) {
+        return mixinPalette.switch ? { modifyVars: mixinPalette.theme } : {};
       }
       else {
-        return {}
+        return {};
       }
     }
     catch (e) {
-      return {}
+      return {};
     }
   }
 
@@ -155,15 +155,16 @@ exports.cssLoaders = function (options) {
   return {
     css: generateLoaders(),
     postcss: generateLoaders(),
-    less: generateLoaders('less', useModifyVars('less')),
-    sass: generateLoaders('sass', {
+    less: generateLoaders("less", useModifyVars("less")),
+    sass: generateLoaders("sass", {
       indentedSyntax: true
     }),
-    scss: generateLoaders('sass'),
-    stylus: generateLoaders('stylus'),
-    styl: generateLoaders('stylus')
-  }
+    scss: generateLoaders("sass"),
+    stylus: generateLoaders("stylus"),
+    styl: generateLoaders("stylus")
+  };
 };
+
 
 /**
  * styleLoaders
@@ -172,74 +173,36 @@ exports.cssLoaders = function (options) {
  * @param options
  * @returns {Array}
  */
-exports.styleLoaders = function (options) {
+exports.styleLoaders = function(options) {
   const output = [];
   const loaders = exports.cssLoaders(options);
 
   for (const extension in loaders) {
     const loader = loaders[extension];
     output.push({
-      test: new RegExp('\\.' + extension + '$'),
+      test: new RegExp("\\." + extension + "$"),
       use: loader
-    })
+    });
   }
 
-  return output
+  return output;
 };
 
+
 exports.createNotifierCallback = () => {
-  const notifier = require('node-notifier');
+  const notifier = require("node-notifier");
 
   return (severity, errors) => {
-    if (severity !== 'error') return;
+    if (severity !== "error") return;
 
     const error = errors[0];
-    const filename = error.file && error.file.split('!').pop();
+    const filename = error.file && error.file.split("!").pop();
 
     notifier.notify({
       title: packageConfig.name,
-      message: severity + ': ' + error.name,
-      subtitle: filename || '',
-      icon: path.join(__dirname, 'logo.png')
-    })
-  }
-};
-
-
-/**
- * 读取json文件
- * @param filePath
- * @returns {any}
- */
-exports.getJsonFile = function (filePath) {
-  //读取指定json文件
-  // var json = fs.readFileSync(path.resolve(__dirname, './data/' + filePath), 'utf-8');
-  var json = fs.readFileSync(path.resolve('./mock/data/' + filePath), 'utf-8');
-  //解析并返回
-  return JSON.parse(json);
-};
-
-/**
- * get alias path config list
- */
-exports.getAliasPathConfig = function () {
-  let aliasPath = {
-    'vue$': 'vue/dist/vue.esm.js',
-    '@': path.resolve('src')
-  };
-  try {
-    config.base.aliasPath.forEach(info => {
-      // if (!aliasPath.hasOwnProperty(info.name)) {
-      //   aliasPath[info.name] = path.resolve(info.path)
-      // }
-      aliasPath[info.name] = path.resolve(info.path)
+      message: severity + ": " + error.name,
+      subtitle: filename || "",
+      icon: path.join(__dirname, "logo.png")
     });
-    return aliasPath;
-  }
-  catch (e) {
-    console.log('\n');
-    console.log(chalk.red('Warning: there are some errors in alias config , so use default config replace it.\n'));
-    return aliasPath;
-  }
+  };
 };
-
