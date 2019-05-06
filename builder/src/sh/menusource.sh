@@ -11,7 +11,7 @@ source ${WORKDIR}'/sh/utils.sh'
 function startMenu {
  while [ 1 ]
       do
-      if [ $TYPE = "main" -o $TYPE = "root" ]
+      if [ $TYPE = "developer" -o $TYPE = "root" ]
        then
 
         Menu_main
@@ -38,7 +38,6 @@ function startMenu {
 
 # main menu show
 function Menu_main {
-    clear
     echo
     echo -e '\t ========== Design by Broccoli spring( gcx ) =========='
     echo
@@ -114,7 +113,7 @@ function Menu_main_command {
             Fn_update_node_modules ;;
           8)
             Fn_update_all ;;
-           9)
+          9)
             Fn_run_prod_plugin
             break ;;
           *)
@@ -144,7 +143,7 @@ function Menu_lint {
 function Menu_lint_command {
       case "$Menu_lint_opt"  in
           0)
-            TYPE="main"
+            TYPE="developer"
             startMenu
             break ;;
           1)
