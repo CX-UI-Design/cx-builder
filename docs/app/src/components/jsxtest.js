@@ -8,7 +8,7 @@ export default {
   name: 'jsx-test',
   data() {
     return {
-      title: 'jsx - test ',
+      title: 'jsx - test123123 ',
     }
   },
   render(h) {
