@@ -8,7 +8,7 @@
 
 const path = require('path');
 const glob = require('glob');
-const config = require(path.resolve('env.param.config'));
+const config = require('../config');
 const prettier = require('prettier');
 const merge = require('webpack-merge');
 const chalk = require('chalk');
