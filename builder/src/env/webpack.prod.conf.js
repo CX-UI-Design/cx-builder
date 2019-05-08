@@ -40,6 +40,13 @@ const prodWebpackConfig = merge(baseWebpackConfig, {
     filename: utils.assetsPath("js/[name].[chunkhash:8].js"),
     chunkFilename: utils.assetsPath("js/[name].[chunkhash:8].js")
   },
+
+  /**
+   * 如果我们想引用一个库，但是又不想让webpack打包，并且又不影响我们在程序中以CMD、AMD或者window/global全局等方式进行使用，
+   * 那就可以通过配置externals。这个功能主要是用在创建一个库的时候用的，但是也可以在我们项目开发中充分使用。
+   */
+  externals: config.prod.externals,
+
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
