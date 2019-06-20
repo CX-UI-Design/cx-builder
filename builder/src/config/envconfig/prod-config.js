@@ -5,7 +5,7 @@ module.exports = {
     // Template for index.html
     index: path.resolve("./dist/index.html"),
     // Paths
-    assetsPublicPath: "./", // 编译发布的根目录，可配置为资源服务器域名或 CDN 域名
+    assetsPublicPath: "/", // 编译发布的根目录，可配置为资源服务器域名或 CDN 域名
     assetsRoot: path.resolve("./dist"), // 编译输出的静态资源路径
     assetsSubDirectory: "static", // 编译输出的二级目录
     favicon: path.resolve("./favicon.ico"), //favicon
