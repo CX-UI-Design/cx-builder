@@ -11,7 +11,7 @@ module.exports = {
     isMinify: true,//是否压缩
 
     // Paths
-    assetsPublicPath: "./", // 编译发布的根目录，可配置为资源服务器域名或 CDN 域名
+    assetsPublicPath: "/", // 编译发布的根目录，可配置为资源服务器域名或 CDN 域名
     assetsRoot: path.resolve("./dist"),// 编译输出的静态资源路径
     assetsSubDirectory: "static",// 编译输出的二级目录
     staticPath: "./static",//静态文件抽取static所在路径
