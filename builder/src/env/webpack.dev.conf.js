@@ -92,7 +92,10 @@ const devWebpackConfig = {
     new HtmlWebpackPlugin({
       filename: "index.html",
       template: config.dev.templateSPA,
-      inject: true
+      inject: true,
+      templateParameters: {
+        BASE_URL: config.dev.assetsPublicPath + config.dev.assetsSubDirectory,
+      },
     }),
     // copy custom static assets
     new CopyWebpackPlugin([
