@@ -10,4 +10,5 @@ const testGet = (req, res) => {
 
 module.exports = {
   'GET /test/get': testGet,
+  'GET /test/get2': testGet,
 };

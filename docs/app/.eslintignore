@@ -4,3 +4,4 @@
 /dist/
 env.param.config.js
 babel.config.js
+env.config.js
