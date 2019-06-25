@@ -2,7 +2,7 @@ const testGet = (req, res) => {
   return res.json({
     "resultCode": 200,
     "resultData": {
-      "status": true
+      "status": false
     },
     "resultMsg": "get-测试操作"
   });
