@@ -1,10 +1,15 @@
 const path = require("path");
 const fs = require("fs-extra");
 const bodyParser = require("body-parser");
+const chokidar = require("chokidar");
+const chalk = require("chalk");
 const config = require("../config");
 
+const mockDir = config.base.mockPath;
 
-const mockModules = [];
+let mockModules = [];
+let mockRoutesLength = null;
+let mockStartIndex = null;
 
 /**
  * get mock modules in mock dir
@@ -26,7 +31,13 @@ const getMockModules = filePath => {
       const ext = filedir.match(reg)[1];//获得文件扩展名
 
       if (["js", "ts", "jsx", "tsx"].includes(ext)) {
-        mockModules.push(require(path.resolve(filedir)));
+
+        const moduleObj = require(path.resolve(filedir));
+        const moduleKeyArr = Object.keys(moduleObj);
+
+        moduleKeyArr.forEach(key => {
+          mockModules.push({ [key]: moduleObj[key] });
+        });
       }
     }
     if (isDir) {
@@ -35,16 +46,19 @@ const getMockModules = filePath => {
   });
 };
 
+/**
+ * register mock API
+ * @param app
+ * @param mockModules - mock modules list
+ */
+function registerMockAPi(app, mockModules) {
 
-module.exports = function(app) {
-  getMockModules(config.base.mockPath);
+  //get mock modules
+  getMockModules(mockDir);
 
-
-  app.use(bodyParser.urlencoded({ extended: false }));
-  app.use(bodyParser.json());
-
-
+  //register
   mockModules.forEach(module => {
+    let mockLastIndex;
     Object.keys(module).forEach(key => {
       const _method = key.split(" ")[0].toLowerCase();//mock 请求方法
       const _url = key.split(" ")[1];//mock 请求地址
@@ -52,12 +66,68 @@ module.exports = function(app) {
 
       // console.log(_method, _url);
 
-      app[_method](_url, _callback);
+      app[_method](_url, _callback);  //core code
+
+      mockLastIndex = app._router.stack.length;
     });
+
+    mockRoutesLength = Object.keys(mockModules).length;
+    mockStartIndex = mockLastIndex - mockRoutesLength;
   });
+}
 
+/**
+ * unregister mock API
+ */
+function unregisterMockAPi() {
+  mockModules = [];
+  Object.keys(require.cache).forEach(i => {
+    if (i.includes(path.join(process.cwd(), mockDir))) {
+      delete require.cache[require.resolve(i)];
+    }
+  });
+}
+
+
+module.exports = function(app) {
+  // es6 polyfill
+  require("@babel/register");
+
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(bodyParser.json());
+
+  registerMockAPi(app, mockModules);//register mock api
+
+  // watch files, hot reload mock server
+  chokidar.watch(
+    path.join(process.cwd(), mockDir),
+    {
+      ignoreInitial: true
+    }
+  ).on(
+    "all",
+    (event, path) => {
+      if (["change", "add", "unlink"].includes(event)) {
+        try {
+          console.log(`\n `);
+          console.log(chalk.magentaBright(`\n > Mock Server watching ...`));
+
+          // remove mock routes stack
+          app._router.stack.splice(mockStartIndex, mockRoutesLength);
+
+          unregisterMockAPi(); //unregister
+
+          registerMockAPi(app, mockModules);//register mock api
+
+          console.log(chalk.magentaBright(`\n > ${event}： ${path}`));
+          console.log(chalk.magentaBright(`\n > Mock Server hot reload success!`));
+
+        } catch (error) {
+          console.log(chalk.redBright(error));
+        }
+      }
+    });
 };
-
 
 
 /**
@@ -65,7 +135,7 @@ module.exports = function(app) {
  * https://www.npmjs.com/package/require-all
  */
 // const controllers = require("require-all")({
-//   dirname: path.resolve(config.base.mockPath)
+//   dirname: path.resolve(mockDir)
 // });
 //
 // //将注入的对象取value转换为数组
