@@ -22,7 +22,7 @@ module.exports = {
       "@core": path.resolve("core")
     },
     prettier: {
-      switch: false,
+      switch: true,
       files: [
         "mock/**/*.js",
         ".postcssrc.js",
