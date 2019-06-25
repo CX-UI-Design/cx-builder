@@ -1,6 +1,6 @@
 {
   "name": "cx-builder",
-  "version": "0.0.46",
+  "version": "0.0.47",
   "description": "cx-builder for build tools",
   "author": "BroccoliSpring <Lensgcx@163.com>",
   "private": false,
@@ -38,6 +38,7 @@
     "babel-plugin-jsx-v-model": "^2.0.3",
     "chai": "^4.2.0",
     "chalk": "2.4.2",
+    "chokidar": "^3.0.1",
     "clean-webpack-plugin": "^2.0.1",
     "compression-webpack-plugin": "^2.0.0",
     "copy-webpack-plugin": "5.0.3",
