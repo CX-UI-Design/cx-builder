@@ -85,7 +85,7 @@ exports.cssLoaders = function(options) {
    * @param loaderOptions         loader 的配置项
    * @returns {*}
    */
-  function generateLoaders(loader, loaderOptions) {
+  const generateLoaders = (loader, loaderOptions) => {
     const loaders = [];
 
     /*----------------------------------------------------------------------------------------*/
@@ -94,7 +94,13 @@ exports.cssLoaders = function(options) {
     /*  此项目中，development 时不分离， production 时 分离                                      */
     /*----------------------------------------------------------------------------------------*/
     if (options.extract) {
-      loaders.push(MiniCssExtractPlugin.loader);
+      loaders.push({
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            publicPath: this.getPropertyByEnv("cssExtractPublicPath")
+          }
+        }
+      );
     } else {
       loaders.push("vue-style-loader");
     }
@@ -126,7 +132,7 @@ exports.cssLoaders = function(options) {
       });
     }
     return loaders;
-  }
+  };
 
   /**
    * judge use modifyVars or not
@@ -157,7 +163,8 @@ exports.cssLoaders = function(options) {
     postcss: generateLoaders(),
     less: generateLoaders("less", useModifyVars("less")),
     sass: generateLoaders("sass", {
-      indentedSyntax: true
+      indentedSyntax: true,
+      publicPath: "../"
     }),
     scss: generateLoaders("sass"),
     stylus: generateLoaders("stylus"),
