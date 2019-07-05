@@ -14,13 +14,14 @@ module.exports = {
     assetsPublicPath: "/", // 编译发布的根目录，可配置为资源服务器域名或 CDN 域名
     assetsRoot: path.resolve("./dist"),// 编译输出的静态资源路径
     assetsSubDirectory: "static",// 编译输出的二级目录
+    cssExtractPublicPath: "./",//MiniCssExtractPlugin 路径
     staticPath: "./static",//静态文件抽取static所在路径
 
     /**
      * 如果我们想引用一个库，但是又不想让webpack打包，并且又不影响我们在程序中以CMD、AMD或者window/global全局等方式进行使用，
      * 那就可以通过配置externals。这个功能主要是用在创建一个库的时候用的，但是也可以在我们项目开发中充分使用。
      */
-    externals:{},
+    externals: {},
 
     // https://webpack.js.org/configuration/devtool/#production
     devtool: "#source-map",
