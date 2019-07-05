@@ -29,7 +29,7 @@ const rules = [
   ...(utils.getPropertyByEnv("useEslint") ? [createLintingRule()] : []),
   {
     test: /\.vue$/,
-    loader: 'vue-loader',
+    loader: "vue-loader",
     options: vueLoaderConfig
   },
   {
@@ -38,8 +38,17 @@ const rules = [
     include: JSBabelInclude
   },
   {
+    test: /\.svg$/,
+    loader: "svg-sprite-loader",
+    include: [utils.rootPath("artisan/src/icons")],
+    options: {
+      symbolId: "icon-[name]"
+    }
+  },
+  {
     test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
     loader: "url-loader",
+    exclude: [utils.rootPath("artisan/src/icons")],
     options: {
       limit: 10000,
       name: utils.assetsPath("img/[name].[hash:7].[ext]")
