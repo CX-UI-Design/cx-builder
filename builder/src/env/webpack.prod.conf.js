@@ -78,8 +78,10 @@ const prodWebpackConfig = merge(baseWebpackConfig, {
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
       },
+
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-      chunksSortMode: "dependency",
+      // chunksSortMode: "dependency",
+
       templateParameters: {
         BASE_URL: config.prod.assetsPublicPath + config.prod.assetsSubDirectory,
       },
