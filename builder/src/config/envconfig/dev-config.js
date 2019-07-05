@@ -6,6 +6,7 @@ module.exports = {
     assetsPublicPath: '/', // 编译发布的根目录，可配置为资源服务器域名或 CDN 域名
     assetsSubDirectory: 'static', // 编译输出的二级目录
     contentBase: path.resolve('./dist'), //"./dist/"
+    cssExtractPublicPath:'./',//MiniCssExtractPlugin 路径
 
     templateSPA: './index.html',//模板文件抽取所在路径
     staticPath: './static',//静态文件static抽取所在路径
