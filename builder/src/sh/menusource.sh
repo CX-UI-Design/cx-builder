@@ -18,7 +18,15 @@ function startMenu {
         Menu_main_opt="$Menu_main_Option"
         Menu_main_command
 
-       elif [ $TYPE = "sub" ]
+      elif [ $TYPE = "sub-mock" ]
+        then
+
+        Menu_mock
+        Menu_mock_opt="$Menu_mock_Option"
+        Menu_mock_command
+
+
+       elif [ $TYPE = "sub-lint" ]
         then
 
         Menu_lint
@@ -60,7 +68,7 @@ function Menu_main {
     echo
     echo -e "\t === NewSee frontend operation menu for SPA VUE-Project=== \n"
     echo -e "\t1. Run development"
-    echo -e "\t2. Run mock"
+    echo -e "\t2. Mock Menu"
     echo -e "\t3. Run production"
     echo -e "\t4. Run production analyz"
     # root menu
@@ -91,7 +99,8 @@ function Menu_main_command {
             Fn_run_dev
             break ;;
           2)
-            Fn_run_mock
+            TYPE="sub-mock"
+            startMenu
             break ;;
           3)
             Fn_run_prod
@@ -100,7 +109,7 @@ function Menu_main_command {
             NODE_ENV=production npm_config_report=true Fn_run_prod
             break ;;
           5)
-            TYPE="sub"
+            TYPE="sub-lint"
             startMenu
             break ;;
            6)
@@ -123,7 +132,7 @@ function Menu_main_command {
 }
 
 
-#lint sub menu
+#lint sub  menu
 function Menu_lint {
     clear
     echo -e "\t === lint && prettier sub menu === \n"
@@ -166,6 +175,38 @@ function Menu_lint_command {
             break ;;
           7)
            Fn_run_lint_style_fix
+            break ;;
+          *)
+          clear
+          echo "Sorry, wrong selection";;
+      esac
+}
+
+
+
+# mock sub menu
+function Menu_mock {
+    clear
+    echo -e "\t === mock sub menu === \n"
+    echo -e "\t1. Run local mock"
+    echo -e "\t2. Run cloud mock"
+    echo -e "\t0. Back to main-menu \n\n"
+    echo -en "\t\tEnter option: "
+    read -n 1 Menu_mock_Option
+}
+
+# mock command case fn
+function Menu_mock_command {
+      case "$Menu_mock_opt"  in
+          0)
+            TYPE="developer"
+            startMenu
+            break ;;
+          1)
+            Fn_run_local_mock
+            break ;;
+          2)
+            Fn_run_cloud_mock
             break ;;
           *)
           clear
