@@ -13,7 +13,9 @@ const HOST = process.env.HOST;
 const PORT = process.env.PORT && Number(process.env.PORT);
 
 const _is_mock = process.env.env_config === "mock";
-const env = require(utils.rootPath("env.config"))[_is_mock ? "mock_env" : "dev_env"];
+
+
+const env = require(utils.rootPath("env.config"))[process.env.process_by_sign];
 
 const devWebpackConfig = {
   mode: "development", // 通过 mode 声明开发环境
@@ -94,8 +96,8 @@ const devWebpackConfig = {
       template: config.dev.templateSPA,
       inject: true,
       templateParameters: {
-        BASE_URL: config.dev.assetsPublicPath + config.dev.assetsSubDirectory,
-      },
+        BASE_URL: config.dev.assetsPublicPath + config.dev.assetsSubDirectory
+      }
     }),
     // copy custom static assets
     new CopyWebpackPlugin([
