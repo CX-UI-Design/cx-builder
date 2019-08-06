@@ -6,7 +6,7 @@
   "private": false,
   "main": "src/main.js",
   "scripts": {
-    "command:local": "../../builder/src/menu.sh root 2",
+    "command:local": "../../builder/src/entry.sh tools",
     "command": "node_modules\\cx-builder\\lib\\menu.sh",
     "command:mac": "node_modules/cx-builder/lib/menu.sh developer",
     "command:mac-root": "node_modules/cx-builder/lib/menu.sh root"

@@ -1,13 +1,13 @@
-const path = require('path');
+const path = require("path");
 const merge = require("webpack-merge");
-const _base_config = require("./envconfig/base-config");
 
+const _base_config = require("./envconfig/base-config");
 const _dev_config = require("./envconfig/dev-config");
 const _prod_config = require("./envconfig/prod-config");
 const _plugin_config = require("./envconfig/plugin-config");
+const _tools_config = require("./envconfig/tools-config");
 
-
-const defaultConfig = merge(_base_config, _dev_config, _prod_config, _plugin_config);
+const defaultConfig = merge(_base_config, _dev_config, _prod_config, _plugin_config, _tools_config);
 
 const customConfig = require(path.resolve("env.param.config"));
 

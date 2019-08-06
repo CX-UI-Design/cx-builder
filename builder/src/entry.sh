@@ -3,7 +3,7 @@
 #!/usr/bin/env bash
 
 WORKDIR=$(dirname $0)
-source ${WORKDIR}'/sh/menusource.sh'
+source ${WORKDIR}'/sh/menusource/index.sh'
 
 clear
 echo
@@ -30,6 +30,8 @@ function runByCommandNum {
     fi
 }
 
+#存储进入的模式，后面菜单需要用到
+ENTRYTYPE=$1
 
 if [ "$1" = "root" ]
     then
@@ -46,6 +48,15 @@ elif [ $1 = "developer" ]
     echo "正在启动 $1 模式，请稍后..."
 
     TYPE="developer"
+    VARNUM=$2
+    runByCommandNum
+
+elif [ $1 = "tools" ]
+    then
+    echo
+    echo "正在启动 $1 模式，请稍后..."
+
+    TYPE="tools"
     VARNUM=$2
     runByCommandNum
 

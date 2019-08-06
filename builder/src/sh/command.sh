@@ -54,6 +54,14 @@ function Fn_run_lint_style {
 function Fn_run_lint_style_fix {
  stylelint src/**/*.{vue,css,scss,less,sass} --fix
 }
+#11、run npm prerelease publish
+function Fn_prerelease_publish {
+  node ${WORKDIR}/tools/release/index.js --version_mode prerelease
+}
+#12、run npm latest publish
+function Fn_latest_publish {
+ node ${WORKDIR}/tools/release/index.js --version_mode latest
+}
 
 
 ##5、run lint
