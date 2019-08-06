@@ -68,5 +68,5 @@ gulp.task('watch', () => {
   });
 });
 
-gulp.task('default', ['js-handle', 'copy_sh', 'copy_img', 'watch']);
+gulp.task('default', ['js-handle', 'copy_sh', 'copy_img']);
 

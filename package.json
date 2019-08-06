@@ -1,11 +1,12 @@
 {
   "name": "cx-builder",
-  "version": "0.0.52",
+  "version": "0.0.53-0",
   "description": "cx-builder for build tools",
   "author": "BroccoliSpring <Lensgcx@163.com>",
   "private": false,
   "main": "lib/run/index.js",
   "scripts": {
+    "build": "./build.sh",
     "release": "node ./builder/src/tools/release/index.js --version_mode prerelease",
     "latest": "node ./builder/src/tools/release/index.js --version_mode latest"
   },

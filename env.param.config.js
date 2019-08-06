@@ -4,9 +4,7 @@ module.exports = {
   tools: {
     publish: {
       prescript: [
-        "cd builder",
-        "ls",
-        "gulp"
+        "npm run build",
       ]
     }
   }
