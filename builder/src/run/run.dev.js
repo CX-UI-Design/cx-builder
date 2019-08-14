@@ -5,7 +5,12 @@ const utils = require("../utils");
 const config = require("../config");
 const devWebpackConfig = require("../env/webpack.dev.conf");
 
-console.log('\n');
+const hs = require("./hookScript");
+
+console.log("\n");
+
+//run pre script
+hs.runHookScript("pre");
 
 /**
  * start by Portfinder
@@ -41,6 +46,7 @@ module.exports = new Promise((resolve, reject) => {
           : undefined
       }));
       resolve(devWebpackConfig);
+
     }
   });
 });
