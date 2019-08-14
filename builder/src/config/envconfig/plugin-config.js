@@ -44,6 +44,9 @@ module.exports = {
     /** Source Maps */
     prodCssSourceMap: false, // 是否开启 cssSourceMap
     prodJsSourceMap: false, // 是否开启 jsSourceMap
-    cacheBusting: true
+    cacheBusting: true,
+
+    prescript: [],//run custom script before main script
+    posscript: []//run custom script after main script
   }
 };
