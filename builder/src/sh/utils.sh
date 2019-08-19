@@ -49,12 +49,12 @@ function is_yarn {
   yarn -v
   if [ $? -eq 0 ];
   then
-       echo tarn exists
+       echo yarn exists
   else
        echo 'Your connection to the default npm registry seems to be slow. Use yarn please'
        echo  yarn is not exists
-       is_cnpm
-       cnpm install -g yarn
+
+       npm install -g yarn
   fi
 }
 
