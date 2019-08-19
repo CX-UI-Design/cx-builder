@@ -19,8 +19,8 @@ function Menu_tools {
     echo -e "\t === Tools menu for Frontend Project=== \n"
     echo -e "\t1. Prerelease publish"
     echo -e "\t2. Latest publish"
-    echo -e "\t3. Reload node_modules"
-    echo -e "\t4. Update all ns package"
+    echo -e "\t3. Upgrade custom packages"
+    echo -e "\t4. Reinstall node_modules"
 
     if [ $TYPE = "sub-tools" ]
     then
@@ -53,9 +53,9 @@ function Menu_tools_command {
             Fn_latest_publish
             break ;;
           3)
-            Fn_update_node_modules ;;
+            Fn_Upgrade_custom_packages ;;
           4)
-            Fn_update_all ;;
+            Fn_reinstall_node_modules ;;
           *)
 
           clear
