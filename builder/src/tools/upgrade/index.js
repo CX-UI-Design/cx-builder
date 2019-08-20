@@ -8,7 +8,7 @@ const config = require(path.resolve("env.param.config"));
 
 const npmUpgradeList = config.tools.npmUpgradeList;
 
-shell.exec('clear');
+shell.exec("clear");
 
 signale.start(`Start to upgrade....\n`);
 
