@@ -14,5 +14,3 @@ signale.start(`Start to reinstall node_modules...\n`);
 shell.exec(`${reinstall} ${shUtilsPath}`);
 
 signale.success(`Reinstall successful...\n`);
-
-
