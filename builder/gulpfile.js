@@ -55,9 +55,6 @@ gulp.task("copy_sh", function() {
   gulp.src(_base_path + "tools/reinstall/reinstall.sh")
     .pipe(gulp.dest(_base_dist_path + "/tools/reinstall"))
     .pipe(notify({ message: "===== reinstall.sh copy complete =====" }));
-  gulp.src(_base_path + "tools/upgrade/upgrade.sh")
-    .pipe(gulp.dest(_base_dist_path + "/tools/upgrade"))
-    .pipe(notify({ message: "===== upgrade.sh copy complete =====" }));
 });
 
 // copy img
