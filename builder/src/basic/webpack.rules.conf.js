@@ -4,7 +4,7 @@ const vueLoaderConfig = require("./vue-loader.conf");
 
 const isDev = process.env.NODE_ENV === "development";
 
-let JSBabelInclude = [...config.base.JSBabelInclude, ...["node_modules/webpack-dev-server/client"]];
+let JSBabelInclude = [...config.base.JSBabelInclude, "node_modules/webpack-dev-server/client"];
 JSBabelInclude = JSBabelInclude.map(src => utils.rootPath(src));
 
 const createLintingRule = () => ({
