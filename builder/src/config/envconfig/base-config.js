@@ -25,6 +25,12 @@ module.exports = {
     //sass-resources-loader 在webpack4中暂时无更新，故而无法使用
     sassResources: [],
 
+    themeConfig: {
+      switch: false,
+      type: 'less',
+      // theme: require(path.resolve('core/basic/style/theme/normal')),
+    },
+
     //prettier code - 美化
     prettier: {
       switch: false,
