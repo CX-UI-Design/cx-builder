@@ -1,6 +1,17 @@
 <template>
   <div id="app">
     <h1>About</h1>
+    <nav>
+      <ul>
+        <li>Go to</li>
+        <li>
+          <a href="../index.html">index</a>
+        </li>
+        <li>
+          <a href="../Home/index.html">Home</a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </template>
 
@@ -10,7 +21,8 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style rel="stylesheet/scss" lang="scss">
+  @import '../../assets/css/common';
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
