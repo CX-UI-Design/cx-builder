@@ -4,8 +4,8 @@ process.env.NODE_ENV = 'testing';
 const webpack = require('webpack');
 const DevServer = require('webpack-dev-server');
 
-const webpackConfig = require('../../env/webpack.prod.conf');
-const devConfigPromise = require('../../run/run.dev.js');
+const webpackConfig = require('../../env/SPA/webpack.prod.conf');
+const devConfigPromise = require('../../run/dev/run.dev.js');
 
 let server;
 
