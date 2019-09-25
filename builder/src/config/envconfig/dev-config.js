@@ -12,9 +12,11 @@ module.exports = {
     templateSPA: "./index.html",//模板文件抽取所在路径
     staticPath: "./static",//静态文件static抽取所在路径
 
+    favicon: path.resolve("./favicon.ico"), //favicon
+
     proxyTable: {},
     host: "localhost", // can be overwritten by process.env.HOST
-    port: 8066, //端口号
+    port: 8080, //端口号
     inline: true,
     autoOpenBrowser: true, //是否自动打开浏览器
     errorOverlay: true, //当出现编译器错误或警告时，在浏览器中显示全屏覆盖层。默认禁用。
