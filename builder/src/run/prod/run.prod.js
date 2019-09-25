@@ -16,6 +16,3 @@ if (["SPA", "spa"].includes(prodMode)) {
 else if (["MPA", "mpa"].includes(prodMode)) {
   runbase(MPA_webpackConfig);
 }
-else {
-  return;
-}
