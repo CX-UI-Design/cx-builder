@@ -202,16 +202,16 @@ exports.styleLoaders = function(options) {
  * @param _Path
  */
 exports.getEntries = _Path => {
-  console.log(33333333);
+
   let entries = {};
   const p = path.resolve(_Path);
-  console.log(p);
+
   glob.sync(p).forEach(entry => {
-    console.log(1111111)
-    console.log(entry)
+
     if (/(views\/(?:.+[^.vue]))/.test(entry)) {
       entries[RegExp.$1.slice(0, RegExp.$1.lastIndexOf("/"))] = entry;
     }
+
   });
   console.log(entries);
   return entries;
