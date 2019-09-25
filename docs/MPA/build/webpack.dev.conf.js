@@ -14,7 +14,7 @@ const entry = getEntries('./src/views/**/App.vue') // 获得入口hmtl文件
 // views module
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
-const title = require('../title')
+
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({
@@ -95,7 +95,7 @@ module.exports = new Promise((resolve, reject) => {
             ? `${filename}.html`
             : `${filename}/index.html`, // `${filename}/index.html`,
           template: 'index.html',
-          title: title[filename],
+          title: filename,
           inject: true,
           minify: {
             removeComments: true,
@@ -105,7 +105,7 @@ module.exports = new Promise((resolve, reject) => {
             // https://github.com/kangax/html-minifier#options-quick-reference
           },
           // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-          chunksSortMode: 'dependency'
+          // chunksSortMode: 'dependency'
         }
         if (pathname in devWebpackConfig.entry) {
           conf.chunks = ['manifest', 'vendor', pathname]

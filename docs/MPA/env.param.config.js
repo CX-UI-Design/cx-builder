@@ -4,13 +4,13 @@ const path = require('path');
 module.exports = {
   dev: {
     mode: 'MPA', //项目模式 SPA / MPA
-    port: 8066,
+    assetsPublicPath: '/',
+    port: 8081,
     useEslint: false,
   },
   prod: {
     mode: 'MPA', //项目模式 SPA / MPA
     assetsPublicPath: '../',
-    // // 提取公共代码
     splitChunks: {
       chunks: 'all',
       maxInitialRequests: 5,
