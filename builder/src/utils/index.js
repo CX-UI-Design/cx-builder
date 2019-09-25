@@ -4,6 +4,7 @@
 "use strict";
 
 const path = require("path");//path模块提供了用于处理文件和目录路径的使用工具
+const glob = require("glob");
 const config = require("../config");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const packageConfig = require("../../package.json");
@@ -193,6 +194,27 @@ exports.styleLoaders = function(options) {
   }
 
   return output;
+};
+
+
+/**
+ * get entries in MPA project
+ * @param _Path
+ */
+exports.getEntries = _Path => {
+  console.log(33333333);
+  let entries = {};
+  const p = path.resolve(_Path);
+  console.log(p);
+  glob.sync(p).forEach(entry => {
+    console.log(1111111)
+    console.log(entry)
+    if (/(views\/(?:.+[^.vue]))/.test(entry)) {
+      entries[RegExp.$1.slice(0, RegExp.$1.lastIndexOf("/"))] = entry;
+    }
+  });
+  console.log(entries);
+  return entries;
 };
 
 
