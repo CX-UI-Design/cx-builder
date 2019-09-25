@@ -66,8 +66,8 @@ const devWebpackConfig = {
      **/
     quiet: config.dev.quiet,
     stats: "errors-only", //stats: "errors-only"表示只打印错误：
-    // before: require('../mock-server/index'),//引入mock/index.js
-    before: _is_mock ? require("../mock-server/index") : (app) => {
+    // before: require('../../mock-server/index'),//引入mock/index.js
+    before: _is_mock ? require("../../mock-server/index") : (app) => {
     },
     watchOptions: {
       poll: config.dev.poll
