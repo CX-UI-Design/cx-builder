@@ -1,6 +1,7 @@
 const path = require("path");
 module.exports = {
   dev: {
+    mode: "SPA",//项目模式 SPA / MPA
     entry: "./src/main.js",
     // Paths
     assetsPublicPath: "/", // 编译发布的根目录，可配置为资源服务器域名或 CDN 域名
