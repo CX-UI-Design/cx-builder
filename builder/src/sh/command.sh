@@ -7,17 +7,17 @@ min_suffix='' #压缩后缀名
 
 #1、run dev
 function Fn_run_dev {
-  NODE_ENV=development env_config=dev process_by_sign=dev_env webpack-dev-server --colors --inline --progress --config ${WORKDIR}/run/run.dev${min_suffix}.js
+  NODE_ENV=development env_config=dev process_by_sign=dev_env webpack-dev-server --colors --inline --progress --config ${WORKDIR}/run/dev/run.dev${min_suffix}.js
 }
 
 #2、run local mock
 function Fn_run_local_mock {
-  NODE_ENV=development env_config=mock process_by_sign=mock_local_env webpack-dev-server --colors --inline --progress --config ${WORKDIR}/run/run.dev${min_suffix}.js
+  NODE_ENV=development env_config=mock process_by_sign=mock_local_env webpack-dev-server --colors --inline --progress --config ${WORKDIR}/run/dev/run.dev${min_suffix}.js
 }
 
 #3、run cloud mock
 function Fn_run_cloud_mock {
-  NODE_ENV=development env_config=dev process_by_sign=mock_cloud_env webpack-dev-server --colors --inline --progress --config ${WORKDIR}/run/run.dev${min_suffix}.js
+  NODE_ENV=development env_config=dev process_by_sign=mock_cloud_env webpack-dev-server --colors --inline --progress --config ${WORKDIR}/run/dev/run.dev${min_suffix}.js
 }
 
 #4、run build
