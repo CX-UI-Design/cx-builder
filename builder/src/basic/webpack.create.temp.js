@@ -16,13 +16,15 @@ const webpackTempConf = {
 
 for (let pathname in entries) {
   let filename = pathname.replace(/views\//, "");
-  console.log(pathname);
+
   let conf = {
     //webpack 默认dist下根目录 index.hbs 为入口文件，除非特别指定
     template: utils.getPropertyByEnv("templateSPA"),
 
+    filename: filename === "index"
+      ? `${filename}.html`
+      : `${filename}/index.html`, // `${filename}/index.html`,
 
-    filename: `${filename}/index.html`,
     favicon: utils.getPropertyByEnv("favicon"),
     title: `${filename}`,
     description: `${filename}`,
