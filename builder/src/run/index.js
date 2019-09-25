@@ -1,5 +1,5 @@
 const chalk = require('chalk');
-const run_dev = require('./run.dev');
+const run_dev = require('./dev/run.dev');
 const run_build = require('./run.build');
 
 const runenv = process.env.env_config;
