@@ -9,10 +9,27 @@ const config = require("../config");
 
 const entries = utils.getEntries("./src/views/**/App.vue"); // 获得入口hmtl文件
 
+const isDev = process.env.NODE_ENV === "development";
+
 const webpackTempConf = {
   plugins: []
 };
 
+/**
+ * OutPut for multiple file
+ * @param filename
+ * @returns {RegExp}
+ */
+function getfileOutPut(filename) {
+  if (isDev) {
+    return filename === "index" ?
+      `${filename}.html` :
+      `${filename}/index.html`;
+  }
+  else {
+    return `${filename}/index.html`;
+  }
+}
 
 for (let pathname in entries) {
   let filename = pathname.replace(/views\//, "");
@@ -21,9 +38,7 @@ for (let pathname in entries) {
     //webpack 默认dist下根目录 index.hbs 为入口文件，除非特别指定
     template: utils.getPropertyByEnv("templateSPA"),
 
-    filename: filename === "index"
-      ? `${filename}.html`
-      : `${filename}/index.html`, // `${filename}/index.html`,
+    filename: getfileOutPut(filename),
 
     favicon: utils.getPropertyByEnv("favicon"),
     title: `${filename}`,
