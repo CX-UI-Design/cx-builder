@@ -134,29 +134,7 @@ const prodWebpackConfig = merge(baseWebpackConfig, webpackCreateTemp, {
 
   optimization: {
     // 提取公共代码
-    splitChunks: {
-      chunks: "all",
-      cacheGroups: {
-        libs: {
-          name: "chunk-libs",
-          test: /[\\/]node_modules[\\/]/,
-          priority: 10,
-          chunks: "initial" // 只打包初始时依赖的第三方
-        },
-        elementUI: {
-          name: "chunk-elementUI", // 单独将 elementUI 拆包
-          priority: 20, // 权重要大于 libs 和 app 不然会被打包进 libs 或者 app
-          test: /[\\/]node_modules[\\/]element-ui[\\/]/
-        },
-        commons: {
-          name: "chunk-commons",
-          test: resolve("src/components"), // 可自定义拓展你的规则
-          minChunks: 3, // 最小公用次数
-          priority: 5,
-          reuseExistingChunk: true
-        }
-      }
-    },
+    splitChunks: config.prod.splitChunks,
     /**
      * 它的作用是将包含chunks 映射关系的 list单独从 app.js里提取出来，因为每一个 chunk 的 id 基本都是基于内容 hash 出来的，
      * 所以你每次改动都会影响它，如果不将它提取出来的话，等于app.js每次都会改变。缓存就失效了
