@@ -18,7 +18,6 @@ exports.rootPath = function(_path) {
   return path.resolve(_path);
 };
 
-
 /**
  * get property by each env
  * @param prop
@@ -40,7 +39,6 @@ exports.getPropertyByEnv = (prop) => {
     throw "Missing dev, mock, build, plugin or base attribute in env.param.config / default file, find it.";
   }
 };
-
 
 /**
  * assetsPath
@@ -173,7 +171,6 @@ exports.cssLoaders = function(options) {
   };
 };
 
-
 /**
  * styleLoaders
  * Generate loaders for standalone style files (outside of .vue)
@@ -196,18 +193,18 @@ exports.styleLoaders = function(options) {
   return output;
 };
 
-
 /**
  * get entries in MPA project
  * @param _Path
  */
-exports.getEntries = _Path => {
+exports.getEntries = function(_Path) {
 
   let entries = {};
   const p = path.resolve(_Path);
 
-  const pagesDir = 'views';
-  const suffix = 'vue,jsx';
+  const pagesDir = "views";
+  const suffix = "vue,jsx";
+  const filterEntries = this.getPropertyByEnv("filterEntries") || [];
 
   glob.sync(p).forEach(entry => {
 
@@ -217,19 +214,17 @@ exports.getEntries = _Path => {
     //匹配是否有 vue 后缀的模板文件
     if (reg.test(entry)) {
 
-      const entryKey = RegExp.$1.slice(0, RegExp.$1.lastIndexOf('/'));
+      const entryKey = RegExp.$1.slice(0, RegExp.$1.lastIndexOf("/"));
 
       //filter entries
-      if (!this.getPropertyByEnv('filterEntries').some(f => `${pagesDir}/${f}` === entryKey)) {
+      if (!filterEntries.some(f => `${pagesDir}/${f}` === entryKey)) {
         entries[entryKey] = entry;
       }
     }
   });
-
   console.log(entries);
   return entries;
 };
-
 
 exports.createNotifierCallback = () => {
   const notifier = require("node-notifier");
