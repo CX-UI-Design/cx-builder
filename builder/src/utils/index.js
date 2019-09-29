@@ -206,13 +206,26 @@ exports.getEntries = _Path => {
   let entries = {};
   const p = path.resolve(_Path);
 
+  const pagesDir = 'views';
+  const suffix = 'vue,jsx';
+
   glob.sync(p).forEach(entry => {
 
-    if (/(views\/(?:.+[^.vue]))/.test(entry)) {
-      entries[RegExp.$1.slice(0, RegExp.$1.lastIndexOf("/"))] = entry;
-    }
+    const str = `(${pagesDir}\/(?:.+[^.(${suffix})]))`;
+    const reg = new RegExp(str);
 
+    //匹配是否有 vue 后缀的模板文件
+    if (reg.test(entry)) {
+
+      const entryKey = RegExp.$1.slice(0, RegExp.$1.lastIndexOf('/'));
+
+      //filter entries
+      if (!this.getPropertyByEnv('filterEntries').some(f => `${pagesDir}/${f}` === entryKey)) {
+        entries[entryKey] = entry;
+      }
+    }
   });
+
   console.log(entries);
   return entries;
 };
