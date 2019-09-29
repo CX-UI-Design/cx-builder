@@ -47,6 +47,8 @@ module.exports = {
     // https://vue-loader.vuejs.org/en/options.html#cachebusting
     cacheBusting: true,
 
+    filterEntries:[],//在MPA 模式下，过滤掉的模块页面
+
     prescript: [],//run custom script before main script
     posscript: []//run custom script after main script
   }
