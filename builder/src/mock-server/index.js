@@ -66,7 +66,10 @@ function registerMockAPi(app, mockModules) {
 
       // console.log(_method, _url);
 
-      app[_method](_url, _callback);  //core code
+      //filter some file is not mock file
+      if (_method && _url && _callback) {
+        app[_method](_url, _callback);  //core code
+      }
 
       mockLastIndex = app._router.stack.length;
     });
