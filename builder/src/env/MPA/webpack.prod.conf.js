@@ -13,7 +13,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+// const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
 
 const utils = require("../../utils");
@@ -146,17 +147,37 @@ const prodWebpackConfig = merge(baseWebpackConfig, webpackCreateTemp, {
      * 但是自定义minimizer后，webpack默认配置会取消掉,所以还需要添加 uglifyjs压缩js.
      */
     minimizer: [
-      new UglifyJsPlugin({
-        uglifyOptions: {
-          mangle: {
-            //支持safari10且修复，2.0.0 版本之后移除
-            // safari10: true,
-          }
-        },
+
+      // new UglifyJsPlugin({
+      //   uglifyOptions: {
+      //     mangle: {
+      //       //支持safari10且修复，2.0.0 版本之后移除
+      //       // safari10: true,
+      //     }
+      //   },
+      //   sourceMap: config.prod.prodJsSourceMap,
+      //   cache: true,
+      //   parallel: true
+      // }),
+
+      /**
+       * 如果代码里面包含了ES6的语法，则uglifyjs不支持，且uglifyjs对去console支持不好，
+       * 故而用terser-webpack-plugin替换掉uglifyjs-webpack-plugin
+       */
+      new TerserPlugin({
+        parallel: true, // 开启多进程压缩
+        cache: true, // 开启缓存(压缩过的不压缩)
         sourceMap: config.prod.prodJsSourceMap,
-        cache: true,
-        parallel: true
+        terserOptions: {
+          warnings: false,
+          compress: {
+            drop_console: true, //去除 console.log
+            drop_debugger: false, //去除 debugger
+            pure_funcs: ["console.log"] // 移除console
+          }
+        }
       }),
+
       // Compress extracted CSS. We are using this plugin so that possible
       // duplicated CSS from different components can be deduped.
       //优化css文件的，主要就是压缩css代码
