@@ -1,24 +1,30 @@
-const path = require('path');
+const path = require("path");
 module.exports = {
   base: {
-    mockPath: './mock',//mock文件所在路径
+    mockPath: "./mock",//mock文件所在路径
 
     //指定extension之后可以不用在require或是import的时候加文件扩展名,会依次尝试添加扩展名进行匹配
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue', '.json', '.scss', 'less'],
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".vue", ".json", ".scss", "less"],
 
     //配置别名可以加快webpack查找模块的速度
     alias: {
-      // 'vue$': 'vue/dist/vue.esm.js',
-      '@': path.resolve('src')
+      /**
+       * vue有两种形式的代码 compiler（模板）模式和runtime模式（运行时），vue模块的package.json的main字段默认为runtime模式， 指向了"dist/vue.runtime.common.js"位置。
+       * 报错：You are using the runtime-only build of Vue where the template compiler is not available. Either pre-compile the templates into render functions, or use the compiler-included build.
+       * import Vue from ‘vue’ 这行代码被解析为 import Vue from ‘vue/dist/vue.esm.js’，直接指定了文件的位置，没有使用main字段默认的文件位置
+       */
+      "vue$": "vue/dist/vue.esm.js",
+
+      "@": path.resolve("src")
     },
 
     //babel compiler path / eslint path
-    JSBabelInclude: ['src', 'mock', 'test'],
+    JSBabelInclude: ["src", "mock", "test"],
 
     //use modify vars - 样式主题混入调试
     mixinPalette: {
       switch: false,
-      type: 'less',
+      type: "less",
       theme: null
     },
 
@@ -27,7 +33,7 @@ module.exports = {
 
     themeConfig: {
       switch: false,
-      type: 'less',
+      type: "less"
       // theme: require(path.resolve('core/basic/style/theme/normal')),
     },
 
@@ -35,10 +41,10 @@ module.exports = {
     prettier: {
       switch: false,
       files: [
-        'src/**/*.{vue,less,scss,css,js,jsx,ts,tsx,json}',
-        'test/**/*.{js,ts,json}',
-        'mock/**/*.{js,ts,json}',
-      ],
-    },
-  },
+        "src/**/*.{vue,less,scss,css,js,jsx,ts,tsx,json}",
+        "test/**/*.{js,ts,json}",
+        "mock/**/*.{js,ts,json}"
+      ]
+    }
+  }
 };
