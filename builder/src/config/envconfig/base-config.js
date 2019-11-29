@@ -8,7 +8,7 @@ module.exports = {
 
     //配置别名可以加快webpack查找模块的速度
     alias: {
-      'vue$': 'vue/dist/vue.esm.js',
+      // 'vue$': 'vue/dist/vue.esm.js',
       '@': path.resolve('src')
     },
 
