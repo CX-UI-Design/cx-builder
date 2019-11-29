@@ -49,7 +49,7 @@ module.exports = {
     },
 
     // https://webpack.js.org/configuration/devtool/#production
-    devtool: "#source-map",
+    devtool: "cheap-module-source-map",// #source-map
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.
     // Before setting to `true`, make sure to:
@@ -71,7 +71,7 @@ module.exports = {
     prodJsSourceMap: false, // 是否开启 jsSourceMap
     cacheBusting: true,
 
-    filterEntries:[],//在MPA 模式下，过滤掉的模块页面
+    filterEntries: [],//在MPA 模式下，过滤掉的模块页面
 
     prescript: [],//run custom script before main script
     posscript: []//run custom script after main script
