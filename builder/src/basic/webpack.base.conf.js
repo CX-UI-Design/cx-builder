@@ -4,9 +4,13 @@ const webpack = require("webpack");
  * 如果 vue-loader 的版本在v15以上，还需要额外配置VueLoaderPlugin
  * 因 vue-loader 版本在 v15以上运行报错 ：Cannot find module 'vue-template-compiler'，且配置 new VueLoaderPlugin()无效。
  * 故而降低 vue-loader 版本至 14.2.2
+ *
+ * 若Vue版本：
+ * < 2.6 则 使用 vue-loader 的版本在v15以下 （14.2.2)
+ * >= 2.6 则 使用 vue-loader 的版本在v15以上 （15.7.1)，且配置 new VueLoaderPlugin()
  */
 // const { VueLoaderPlugin } = require("vue-loader");
-// const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const utils = require("../utils");
 const config = require("../config");
 const rules = require("./webpack.rules.conf.js");
@@ -29,7 +33,8 @@ module.exports = {
     rules: [...rules]
   },
   plugins: [
-    // new VueLoaderPlugin(),
+    new VueLoaderPlugin(),
+
     new webpack.ProvidePlugin({
       jQuery: "jquery",
       $: "jquery"
