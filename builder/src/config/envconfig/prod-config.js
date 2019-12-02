@@ -71,6 +71,9 @@ module.exports = {
     prodJsSourceMap: false, // 是否开启 jsSourceMap
     cacheBusting: true,
 
+    dropConsole: true,//去除 console
+    dropDebugger: true,//去除 debugger
+
     filterEntries: [],//在MPA 模式下，过滤掉的模块页面
 
     prescript: [],//run custom script before main script
