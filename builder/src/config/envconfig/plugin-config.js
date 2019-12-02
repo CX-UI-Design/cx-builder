@@ -46,6 +46,9 @@ module.exports = {
     prodJsSourceMap: false, // 是否开启 jsSourceMap
     cacheBusting: true,
 
+    dropConsole: true,//去除 console
+    dropDebugger: true,//去除 debugger
+
     prescript: [],//run custom script before main script
     posscript: []//run custom script after main script
   }
