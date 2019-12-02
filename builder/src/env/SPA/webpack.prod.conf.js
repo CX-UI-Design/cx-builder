@@ -164,9 +164,9 @@ const prodWebpackConfig = merge(baseWebpackConfig, {
         terserOptions: {
           warnings: false,
           compress: {
-            drop_console: true, //去除 console.log
-            drop_debugger: false, //去除 debugger
-            pure_funcs: ["console.log"] // 移除console
+            drop_console: config.prod.dropConsole, //去除 console.log
+            drop_debugger: config.prod.dropDebugger, //去除 debugger
+            pure_funcs: config.prod.dropConsole ? ["console.log"] : [] // 移除console
           }
         }
       }),
