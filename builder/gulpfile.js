@@ -11,6 +11,8 @@ var notify = require("gulp-notify");
 var _base_path = "src/";
 var _base_dist_path = "../lib";
 
+process.env.BABEL_MODULE = 'commonjs';
+
 var t = 0;       								       //计数开始为0
 var showinfo = function() {
   t++;
