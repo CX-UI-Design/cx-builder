@@ -7,19 +7,26 @@ const config = require("../config");
 
 const mockDir = config.base.mockPath;
 
-let mockModules = [];
+
+const _priority_sign = "@priority";
+let mockObj = {};
+let mockModules = [];//mock 模块集合列表
+
+
 let mockRoutesLength = null;
 let mockStartIndex = null;
 
 /**
- * get mock modules in mock dir
- * @param filePath
+ * recursive file in mock dir
+ * 在 Mock 文件所在目录中，递归查找相关文件，生成 Mock 模块对象
+ * @param filePath  - files path for found mock modules
  */
-const getMockModules = filePath => {
+const recursiveFile = filePath => {
 
   const files = fs.readdirSync(filePath);
 
   files.forEach(filename => {
+
     const filedir = path.join(filePath, filename);
     const statInfo = fs.statSync(filedir);//return fs.Stats object by file path
     const isFile = statInfo.isFile();//is file
@@ -36,22 +43,54 @@ const getMockModules = filePath => {
         const moduleKeyArr = Object.keys(moduleObj);
 
         moduleKeyArr.forEach(key => {
-          mockModules.push({ [key]: moduleObj[key] });
+
+          mockObj[key] = moduleObj[key];
+          // mockModules.push({ [key]: moduleObj[key] });
+
         });
       }
     }
     if (isDir) {
-      getMockModules(filedir);
+      recursiveFile(filedir);
     }
   });
 };
 
 /**
- * register mock API
- * @param app
- * @param mockModules - mock modules list
+ * get mock modules in mock dir
+ * 将 Mock 模块对象转换处理成 Mock 注册模块队列
+ * @param filePath  - files path for found mock modules
  */
-function registerMockAPi(app, mockModules) {
+function getMockModules(filePath) {
+  //get mock modules
+  recursiveFile(filePath);
+
+
+  Object.keys(mockObj).forEach(key => {
+    const _isPriority = key.split(" ")[2] === _priority_sign;//是否具备优先级
+    if (_isPriority) {
+      const _method = key.split(" ")[0];//mock 请求方法
+      const _url = key.split(" ")[1];//mock 请求地址
+      const sign = `${_method} ${_url}`;
+
+      if (mockObj.hasOwnProperty(sign)) {
+        delete mockObj[sign];
+      }
+    }
+  });
+
+  mockModules = Object.keys(mockObj).map(key => {
+      return { [key]: mockObj[key] };
+    }
+  );
+}
+
+
+/**
+ * register mock API - 注册
+ * @param app
+ */
+function registerMockAPi(app) {
 
   //get mock modules
   getMockModules(mockDir);
@@ -64,7 +103,6 @@ function registerMockAPi(app, mockModules) {
       const _url = key.split(" ")[1];//mock 请求地址
       const _callback = module[key];//mock 回调函数
 
-      // console.log(_method, _url);
 
       //filter some file is not mock file
       if (_method && _url && _callback) {
@@ -77,13 +115,18 @@ function registerMockAPi(app, mockModules) {
     mockRoutesLength = Object.keys(mockModules).length;
     mockStartIndex = mockLastIndex - mockRoutesLength;
   });
+
+
 }
 
 /**
- * unregister mock API
+ * unregister mock API - 注销
  */
 function unregisterMockAPi() {
+
+  mockObj = {};
   mockModules = [];
+
   Object.keys(require.cache).forEach(i => {
     if (i.includes(path.join(process.cwd(), mockDir))) {
       delete require.cache[require.resolve(i)];
@@ -99,7 +142,7 @@ module.exports = function(app) {
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
 
-  registerMockAPi(app, mockModules);//register mock api
+  registerMockAPi(app);//register mock api
 
   // watch files, hot reload mock server
   chokidar.watch(
@@ -120,7 +163,10 @@ module.exports = function(app) {
 
           unregisterMockAPi(); //unregister
 
-          registerMockAPi(app, mockModules);//register mock api
+          app.use(bodyParser.urlencoded({ extended: false }));
+          app.use(bodyParser.json());
+
+          registerMockAPi(app);//register mock api
 
           console.log(chalk.magentaBright(`\n > ${event}： ${path}`));
           console.log(chalk.magentaBright(`\n > Mock Server hot reload success!`));
