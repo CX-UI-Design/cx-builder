@@ -78,6 +78,14 @@ exports.cssLoaders = function(options) {
     }
   };
 
+  // const px2remLoader = {
+  //   loader: "px2rem-loader",
+  //   options: {
+  //     rootValue: 75,
+  //     propList: ['*']
+  //   }
+  // };
+
   /**
    * 生成加载器 - generate loader string to be used with extract text plugin
    * @param loader                loader 的名称
@@ -105,6 +113,10 @@ exports.cssLoaders = function(options) {
     }
 
     loaders.push(cssLoader);
+
+    // if (options.usepx2rem) {
+    //   loaders.push(px2remLoader);
+    // }
 
     if (options.usePostCSS) {
       loaders.push(postcssLoader);
