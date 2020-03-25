@@ -1,6 +1,6 @@
 {
   "name": "cx-builder",
-  "version": "0.0.53-36",
+  "version": "0.0.53-37",
   "description": "cx-builder for build tools",
   "author": "BroccoliSpring <Lensgcx@163.com>",
   "private": false,
@@ -76,6 +76,7 @@
     "portfinder": "1.0.20",
     "postcss-import": "12.0.1",
     "postcss-loader": "3.0.0",
+    "postcss-pxtorem": "^5.1.1",
     "postcss-url": "8.0.0",
     "prettier": "^1.17.0",
     "readline-sync": "^1.4.10",
