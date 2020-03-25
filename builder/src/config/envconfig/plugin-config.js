@@ -50,6 +50,9 @@ module.exports = {
     dropDebugger: true,//去除 debugger
 
     prescript: [],//run custom script before main script
-    posscript: []//run custom script after main script
+    posscript: [],//run custom script after main script
+
+    usepxtorem: false,//是否使用px转换rem
+    remUnit: 16//1rem等于多少px的转换单位
   }
 };
