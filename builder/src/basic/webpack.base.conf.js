@@ -11,6 +11,8 @@ const webpack = require("webpack");
  */
 // const { VueLoaderPlugin } = require("vue-loader");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
+// 设置了extract：true，所以还需要在plugins中引入，否则会报错
+const SvgSpriteLoader = require("svg-sprite-loader/plugin");
 const utils = require("../utils");
 const config = require("../config");
 const rules = require("./webpack.rules.conf.js");
@@ -38,7 +40,9 @@ module.exports = {
     new webpack.ProvidePlugin({
       jQuery: "jquery",
       $: "jquery"
-    })
+    }),
+
+    new SvgSpriteLoader()
   ],
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue

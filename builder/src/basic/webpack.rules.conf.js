@@ -1,10 +1,11 @@
+const path = require("path");
 const utils = require("../utils");
 const config = require("../config");
 const vueLoaderConfig = require("./vue-loader.conf");
 
 const isDev = process.env.NODE_ENV === "development";
 
-let JSBabelInclude = [...config.base.JSBabelInclude, "node_modules/webpack-dev-server/client"];
+let JSBabelInclude = [...config.base.babel.include, "node_modules/webpack-dev-server/client"];
 JSBabelInclude = JSBabelInclude.map(src => utils.rootPath(src));
 
 const createLintingRule = () => ({
@@ -24,7 +25,6 @@ const createLintingRule = () => ({
   }
 });
 
-
 const rules = [
   ...(utils.getPropertyByEnv("useEslint") ? [createLintingRule()] : []),
   {
@@ -34,21 +34,32 @@ const rules = [
   },
   {
     test: /\.js$/,
+    //cacheDirectory:默认值是false。如果设置了这个参数，被转换的结果将会被缓存起来。
+    //当webpack再次编译时，将会首先尝试从缓存中读取转换结果，以此避免资源浪费。
+    //如果该值为空(loader:'babel-loader?cacheDirectory'),loader会使用系统默认的临时文件目录
     loader: "babel-loader?cacheDirectory",
-    include: JSBabelInclude
+    include: JSBabelInclude,
+    options: {
+      configFile: path.resolve(__dirname, "../compile/babel.config.js")// configFile 配置为 false, 可以禁用项目范围的配置文件
+    }
   },
+  //Webpack loader for creating SVG sprites.
   {
     test: /\.svg$/,
     loader: "svg-sprite-loader",
-    include: [utils.rootPath("artisan/src/icons")],
+    include: config.base.svgSprite.include,
     options: {
-      symbolId: "icon-[name]"
+      symbolId: "icon-[name]",
+      extract: isDev ? false : config.base.svgSprite.extract,
+      outputPath: config.base.svgSprite.outputPath,
+      publicPath: config.base.svgSprite.publicPath,
+      spriteFilename: config.base.svgSprite.spriteFilename
     }
   },
   {
     test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
     loader: "url-loader",
-    exclude: [utils.rootPath("artisan/src/icons")],
+    exclude: config.base.svgSprite.include,
     options: {
       limit: 10000,
       name: utils.assetsPath("img/[name].[hash:7].[ext]")
@@ -69,6 +80,13 @@ const rules = [
       limit: 10000,
       name: utils.assetsPath("fonts/[name].[hash:7].[ext]")
     }
+  },
+  {
+    test: /\.md$/,
+    use: [
+      { loader: "html-loader" },
+      { loader: "markdown-loader", options: {} }
+    ]
   }
 ];
 
