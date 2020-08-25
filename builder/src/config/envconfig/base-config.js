@@ -3,6 +3,19 @@ module.exports = {
   base: {
     mockPath: "./mock",//mock文件所在路径
 
+    babel: {
+      priority: false,//是否根配置优先
+      //babel compiler path / eslint path
+      include: [
+        "env.config.js",
+        "env.param.config.js",
+        "config",
+        "mock",
+        "node_modules/neap-test1/injection",
+        "node_modules/neap-test1/lib"
+      ]
+    },
+
     //指定extension之后可以不用在require或是import的时候加文件扩展名,会依次尝试添加扩展名进行匹配
     extensions: [".js", ".jsx", ".ts", ".tsx", ".vue", ".json", ".scss", "less"],
 
@@ -18,8 +31,15 @@ module.exports = {
       "@": path.resolve("src")
     },
 
-    //babel compiler path / eslint path
-    JSBabelInclude: ["src", "mock", "test"],
+    //Webpack loader for creating SVG sprites.
+    svgSprite: {
+      include: [path.resolve("config/expand/iconfont")],
+      extract: true,
+      outputPath: "static/svgIcons/",
+      publicPath: "static/svgIcons/",
+      spriteFilename: "svg-sprite.svg"
+    },
+
 
     //use modify vars - 样式主题混入调试
     mixinPalette: {

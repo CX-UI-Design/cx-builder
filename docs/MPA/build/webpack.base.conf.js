@@ -5,6 +5,7 @@ const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 const glob = require('glob')
 const entry = getEntries('./src/views/**/*.js') // 获得入口js文件
+
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }

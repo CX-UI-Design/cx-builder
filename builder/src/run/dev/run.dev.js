@@ -1,3 +1,5 @@
+require("@babel/plugin-transform-modules-commonjs");
+
 const FriendlyErrorsPlugin = require("friendly-errors-webpack-plugin");
 const portfinder = require("portfinder");
 

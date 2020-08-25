@@ -37,7 +37,7 @@ const recursiveFile = filePath => {
       const reg = /\.([0-9a-z]+)(?:[\?#]|$)/i; //文件扩展名的正则表达式
       const ext = filedir.match(reg)[1];//获得文件扩展名
 
-      if (["js", "ts", "jsx", "tsx"].includes(ext)) {
+      if (["js", "mjs", "ts", "jsx", "tsx"].includes(ext)) {
 
         const moduleObj = require(path.resolve(filedir));
         const moduleKeyArr = Object.keys(moduleObj);

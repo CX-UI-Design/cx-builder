@@ -177,6 +177,7 @@ exports.cssLoaders = function(options) {
       indentedSyntax: true,
       publicPath: "../"
     }),
+
     scss: generateLoaders("sass"),
     stylus: generateLoaders("stylus"),
     styl: generateLoaders("stylus")
