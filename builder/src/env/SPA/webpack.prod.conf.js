@@ -161,7 +161,7 @@ const prodWebpackConfig = merge(baseWebpackConfig, {
         cache: true, // 开启缓存(压缩过的不压缩)
         sourceMap: config.prod.prodJsSourceMap,
         terserOptions: {
-          warnings: false,
+          warnings: config.prod.clearWarning, //在控制台去除警告日志
           compress: {
             drop_console: config.prod.dropConsole, //去除 console.log
             drop_debugger: config.prod.dropDebugger, //去除 debugger
