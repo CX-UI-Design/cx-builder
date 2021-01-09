@@ -37,11 +37,14 @@ const rules = [
     //cacheDirectory:默认值是false。如果设置了这个参数，被转换的结果将会被缓存起来。
     //当webpack再次编译时，将会首先尝试从缓存中读取转换结果，以此避免资源浪费。
     //如果该值为空(loader:'babel-loader?cacheDirectory'),loader会使用系统默认的临时文件目录
+
     // loader: 'babel-loader?cacheDirectory',
-    loader: 'happypack/babel-loader?id=happy-babel-js', // 增加新的HappyPack构建loader
+
+    loader: 'happypack/loader', // 增加新的HappyPack构建loader
     include: JSBabelInclude,
     options: {
-      cacheDirectory: true,
+      id: 'happy-babel-loader',
+      cacheDirectory: true, // 缓存
       configFile: path.resolve(__dirname, '../compile/babel.config.js'), // configFile 配置为 false, 可以禁用项目范围的配置文件
     },
   },
