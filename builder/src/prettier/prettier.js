@@ -21,7 +21,7 @@ let files = [];
 
 try {
   config.base.prettier.files.forEach(path => {
-    const f = glob.sync(path, {ignore: ['**/node_modules/**', 'build/**']});
+    const f = glob.sync(path, {ignore: ['**/node_modules/**', 'build/**','dist/**']});
     files = files.concat(f);
   });
 }
