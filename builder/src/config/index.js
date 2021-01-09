@@ -24,13 +24,19 @@ if (!customConfig) {
  * @returns {*}
  */
 function filterChangeConfig(defaultConfig, customConfig) {
-  /*
-   * 提取公共代码的配置项，一旦自定义配置后，将全部覆盖原有默认配置，而不是根据字段合并
-   */
-  if (customConfig.prod.splitChunks) {
-    defaultConfig.prod.splitChunks = {};
+  try {
+
+    /**
+     * 提取公共代码的配置项，一旦自定义配置后，将全部覆盖原有默认配置，而不是根据字段合并
+     */
+    if (customConfig.prod.splitChunks) {
+      defaultConfig.prod.splitChunks = {};
+    }
+    return defaultConfig;
   }
-  return defaultConfig;
+  catch (e) {
+    return defaultConfig;
+  }
 }
 
 
