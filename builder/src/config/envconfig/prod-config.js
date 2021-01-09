@@ -81,6 +81,7 @@ module.exports = {
 
 
     usepxtorem: false,//是否使用px转换rem
+
     remUnit: 16//1rem等于多少px的转换单位
 
   }
