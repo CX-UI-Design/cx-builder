@@ -71,6 +71,7 @@ module.exports = {
     prodJsSourceMap: false, // 是否开启 jsSourceMap
     cacheBusting: true,
 
+    clearWarning: false, //在控制台去除警告日志
     dropConsole: true, //去除 console
     dropDebugger: true, //去除 debugger
 
