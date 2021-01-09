@@ -10,7 +10,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 // const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-
+const ProgressPlugin = require('progress-webpack-plugin')
 
 const utils = require("../../utils/index");
 const config = require("../../config/index");
@@ -49,6 +49,9 @@ const prodWebpackConfig = merge(baseWebpackConfig, {
   externals: config.prod.externals,
 
   plugins: [
+    //webpack 打包进度条
+    new ProgressPlugin(true),
+
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       "process.env": env
