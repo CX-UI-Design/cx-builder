@@ -10,11 +10,15 @@ const webpack = require('webpack');
  * >= 2.6 则 使用 vue-loader 的版本在v15以上 （15.7.1)，且配置 new VueLoaderPlugin()
  */
 // const { VueLoaderPlugin } = require("vue-loader");
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
 // 设置了extract：true，所以还需要在plugins中引入，否则会报错
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+
 const SvgSpriteLoader = require('svg-sprite-loader/plugin');
-const HappyPack = require('happypack');
 const WebpackBar = require('webpackbar'); //webpack 构建编译进度条 插件
+
+const HappyPack = require('happypack');
+const os = require('os');
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
 const utils = require('../utils');
 const config = require('../config');
@@ -38,13 +42,24 @@ const baseWebpackConfig = {
     rules: [...rules],
   },
   plugins: [
-    new HappyPack({
-      id: 'happy-babel-js',
-      loaders: ['babel-loader?cacheDirectory=true'],
-      // threadPool: happyThreadPool
-    }),
-
     new VueLoaderPlugin(),
+
+    new HappyPack({
+      //用id来标识 happypack处理那里类文件
+      id: 'happy-babel-loader',
+      //如何处理  用法和loader 的配置一样
+      loaders: [
+        {
+          loader: 'babel-loader?cacheDirectory=true',
+        },
+      ],
+      //共享进程池
+      threadPool: happyThreadPool,
+      //允许 HappyPack 输出日志
+      verbose: false,
+      //启用debug 用于故障排查。默认 false。
+      debug: false,
+    }),
 
     new webpack.ProvidePlugin({
       jQuery: 'jquery',
