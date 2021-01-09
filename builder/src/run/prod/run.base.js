@@ -9,6 +9,7 @@ const path = require('path');
 const chalk = require('chalk');
 const webpack = require('webpack');
 
+const config = require('../../config/index');
 const utils = require('../../utils');
 const hs = require('../hookScript');
 
@@ -33,16 +34,17 @@ module.exports = profConf => {
     2
   );
 
-  console.log('\n');
-  const spinner = ora('building for production...');
-  spinner.start();
+  // console.log('\n');
+  // const spinner = ora('building for production...');
+  // spinner.start();
 
   rm(
     path.join(utils.getPropertyByEnv('assetsRoot'), utils.getPropertyByEnv('assetsSubDirectory')),
     err => {
       if (err) throw err;
       webpack(profConf, (err, stats) => {
-        spinner.stop();
+        // spinner.stop();
+
         if (err) throw err;
 
         //构建下，控制台输出设置
@@ -61,7 +63,7 @@ module.exports = profConf => {
         console.log(chalk.cyan('  Build complete.\n'));
         console.log(
           chalk.cyan(
-            `  Build cost ${prodTimeInterval} s , Pre hook script run cost ${hookScriptTimeInterval} s . \n`
+            `  Build cost ${prodTimeInterval}s , Pre hook script run cost ${hookScriptTimeInterval}s . \n`
           )
         );
 
