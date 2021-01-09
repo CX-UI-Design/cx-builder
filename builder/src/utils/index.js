@@ -268,5 +268,5 @@ exports.timeIntervalFn = (startTime, endTime, unit, fixed = 2) => {
   };
 
   const u = unitMap[unit] || 1e9;
-  return (Number(`${startTime - endTime}` + '') / u).toFixed(fixed);
+  return (Number(`${endTime - startTime}` + '') / u).toFixed(fixed);
 };
