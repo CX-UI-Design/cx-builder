@@ -1,8 +1,8 @@
 module.exports = {
   tools: {
     publish: {
-      prescript: []
+      prescript: [],
     },
-    npmUpgradeList: []
-  }
+    npmUpgradeList: [],
+  },
 };

@@ -1,31 +1,29 @@
-require("@babel/plugin-transform-modules-commonjs");
+require('@babel/plugin-transform-modules-commonjs');
 
-const FriendlyErrorsPlugin = require("friendly-errors-webpack-plugin");
-const portfinder = require("portfinder");
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+const portfinder = require('portfinder');
 
-const utils = require("../../utils/index");
-const config = require("../../config/index");
+const utils = require('../../utils/index');
+const config = require('../../config/index');
 const devMode = config.dev.mode;
 
-const SPA_webpackConfig = require("../../env/SPA/webpack.dev.conf"); // SPA prod config
-const MPA_webpackConfig = require("../../env/MPA/webpack.dev.conf");// MPA prod config
+const SPA_webpackConfig = require('../../env/SPA/webpack.dev.conf'); // SPA prod config
+const MPA_webpackConfig = require('../../env/MPA/webpack.dev.conf'); // MPA prod config
 
 let devWebpackConfig = null;
 
-if (["SPA", "spa"].includes(devMode)) {
+if (['SPA', 'spa'].includes(devMode)) {
   devWebpackConfig = SPA_webpackConfig;
-}
-else if (["MPA", "mpa"].includes(devMode)) {
+} else if (['MPA', 'mpa'].includes(devMode)) {
   devWebpackConfig = MPA_webpackConfig;
 }
 
-const hs = require("../hookScript");
+const hs = require('../hookScript');
 
-console.log("\n");
+console.log('\n');
 
 //run pre script
-hs.runHookScript("pre");
-
+hs.runHookScript('pre');
 
 /**
  * start by Portfinder
@@ -40,7 +38,6 @@ module.exports = new Promise((resolve, reject) => {
     if (err) {
       reject(err);
     } else {
-
       // publish the new Port, necessary for e2e tests
       process.env.PORT = port;
       // add port to devServer config
@@ -49,21 +46,20 @@ module.exports = new Promise((resolve, reject) => {
       console.log(port);
 
       // Add FriendlyErrorsPlugin
-      devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
-        compilationSuccessInfo: {
-          // notes: [`Create by Broccoli spring( gcx ) <Lensgcx@163.com>: https://github.com/Lensgcx`],\
-          notes: [`Create by Broccoli spring( gcx )`],
-          messages: [
-            `Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`
-          ]
-        },
-        onErrors: config.dev.notifyOnErrors
-          ? utils.createNotifierCallback()
-          : undefined
-      }));
+      devWebpackConfig.plugins.push(
+        new FriendlyErrorsPlugin({
+          compilationSuccessInfo: {
+            // notes: [`Create by Broccoli spring( gcx ) <Lensgcx@163.com>: https://github.com/Lensgcx`],\
+            notes: [`Create by Broccoli spring( gcx )`],
+            messages: [
+              `Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`,
+            ],
+          },
+          onErrors: config.dev.notifyOnErrors ? utils.createNotifierCallback() : undefined,
+        })
+      );
 
       resolve(devWebpackConfig);
-
     }
   });
 });

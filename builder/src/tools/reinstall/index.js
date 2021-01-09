@@ -1,11 +1,11 @@
 /**
  * Reinstall node_modules
  */
-const path = require("path");
-const shell = require("shelljs");
-const signale = require("signale");
-const reinstall = path.resolve(__dirname, "./reinstall.sh");
-const shUtilsPath = path.resolve(__dirname, "../../sh/utils.sh");
+const path = require('path');
+const shell = require('shelljs');
+const signale = require('signale');
+const reinstall = path.resolve(__dirname, './reinstall.sh');
+const shUtilsPath = path.resolve(__dirname, '../../sh/utils.sh');
 
 shell.exec('clear');
 

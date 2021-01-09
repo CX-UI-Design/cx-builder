@@ -15,11 +15,8 @@ const merge = require('webpack-merge');
 const fs = require('fs');
 const prettierConfigPath = require.resolve(path.resolve('.prettierrc'));
 
-
 try {
-
   if (config.base.prettier.switch) {
-
     const files = process.argv.slice(2);
 
     let didError = false;
@@ -37,7 +34,7 @@ try {
         const input = fs.readFileSync(file, 'utf8');
 
         const withParserOptions = merge(options, {
-          parser: fileInfo.inferredParser
+          parser: fileInfo.inferredParser,
         });
 
         // const withParserOptions = {
@@ -60,10 +57,6 @@ try {
     }
     console.log('\x1b[32m lint prettier success!');
   }
-}
-catch (e) {
+} catch (e) {
   console.log(e);
 }
-
-
-

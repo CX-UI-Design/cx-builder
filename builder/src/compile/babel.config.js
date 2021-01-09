@@ -7,7 +7,6 @@ const babelrc = require('./babelrc');
 let exportConf = {};
 
 if (fs.existsSync(utils.rootPath('./babel.config.js'))) {
-
   const rootConf = require(utils.rootPath('babel.config.js'));
 
   //是否根配置优先
@@ -21,17 +20,12 @@ if (fs.existsSync(utils.rootPath('./babel.config.js'))) {
 
     exportConf.plugins = [...new Set(exportConf.plugins)];
     exportConf.presets = [...new Set(exportConf.presets)];
-
   }
-
-}
-else {
+} else {
   exportConf = babelrc;
 }
-
 
 // console.log(' 处理好的babel配置如下：');
 // console.log(exportConf);
 
 module.exports = exportConf;
-

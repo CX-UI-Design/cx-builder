@@ -21,17 +21,14 @@ let files = [];
 
 try {
   config.base.prettier.files.forEach(path => {
-    const f = glob.sync(path, {ignore: ['**/node_modules/**', 'build/**','dist/**']});
+    const f = glob.sync(path, { ignore: ['**/node_modules/**', 'build/**', 'dist/**'] });
     files = files.concat(f);
   });
-}
-catch (e) {
+} catch (e) {
   console.log(e);
 }
 
-
 if (files.length) {
-
   console.log(chalk.cyan('\n'));
   console.log(chalk.cyan('  prettier is running...\n'));
 
@@ -47,7 +44,7 @@ if (files.length) {
       const input = fs.readFileSync(file, 'utf8');
 
       const withParserOptions = merge(options, {
-        parser: fileInfo.inferredParser
+        parser: fileInfo.inferredParser,
       });
 
       // const withParserOptions = {
@@ -73,5 +70,3 @@ if (files.length) {
 
   console.log(chalk.cyan('  prettier success!\n'));
 }
-
-

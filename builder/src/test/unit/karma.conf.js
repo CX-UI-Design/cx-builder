@@ -5,7 +5,7 @@
 
 var webpackConfig = require('../../env/webpack.test.conf');
 
-module.exports = function karmaConfig (config) {
+module.exports = function karmaConfig(config) {
   config.set({
     // to run in additional browsers:
     // 1. install corresponding karma launcher
@@ -16,18 +16,15 @@ module.exports = function karmaConfig (config) {
     reporters: ['spec', 'coverage'],
     files: ['index.js'],
     preprocessors: {
-      './index.js': ['webpack', 'sourcemap']
+      './index.js': ['webpack', 'sourcemap'],
     },
     webpack: webpackConfig,
     webpackMiddleware: {
-      noInfo: true
+      noInfo: true,
     },
     coverageReporter: {
       dir: './coverage',
-      reporters: [
-        { type: 'lcov', subdir: '.' },
-        { type: 'text-summary' }
-      ]
-    }
-  })
+      reporters: [{ type: 'lcov', subdir: '.' }, { type: 'text-summary' }],
+    },
+  });
 };
