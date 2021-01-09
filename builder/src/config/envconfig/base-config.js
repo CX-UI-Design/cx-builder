@@ -11,8 +11,8 @@ module.exports = {
         "env.param.config.js",
         "config",
         "mock",
-        "node_modules/neap-test1/injection",
-        "node_modules/neap-test1/lib"
+        "node_modules/neap-core/injection",
+        "node_modules/neap-core/lib"
       ]
     },
 
@@ -27,8 +27,9 @@ module.exports = {
        * import Vue from ‘vue’ 这行代码被解析为 import Vue from ‘vue/dist/vue.esm.js’，直接指定了文件的位置，没有使用main字段默认的文件位置
        */
       "vue$": "vue/dist/vue.esm.js",
-
-      "@": path.resolve("src")
+      "@": path.resolve("src"),
+      '@ROOT': path.resolve(''),
+      '@NEAP': path.resolve('main/src'),
     },
 
     //Webpack loader for creating SVG sprites.
