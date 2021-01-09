@@ -18,20 +18,8 @@ if (['SPA', 'spa'].includes(devMode)) {
   devWebpackConfig = MPA_webpackConfig;
 }
 
-//dev编译构建计时开始：初始时间
-const devStartTime = process.hrtime.bigint();
-
-//前置钩子 计时开始：初始时间
-const hookScriptStartTime = process.hrtime.bigint();
-
 //run pre script
 hs.runHookScript('pre');
-
-//前置钩子 计时结束：结束时间
-const hookScriptEndTime = process.hrtime.bigint();
-
-//前置钩子 运行时间间隔
-const hookScriptTimeInterval = utils.timeIntervalFn(hookScriptStartTime, hookScriptEndTime, 's', 2);
 
 console.log('\n');
 
@@ -53,8 +41,6 @@ module.exports = new Promise((resolve, reject) => {
       // add port to devServer config
       devWebpackConfig.devServer.port = port;
 
-      console.log(port);
-
       // Add FriendlyErrorsPlugin
       devWebpackConfig.plugins.push(
         new FriendlyErrorsPlugin({
@@ -67,17 +53,6 @@ module.exports = new Promise((resolve, reject) => {
           },
           onErrors: config.dev.notifyOnErrors ? utils.createNotifierCallback() : undefined,
         })
-      );
-
-      //dev编译构建计时结束：结束时间
-      const devEndTime = process.hrtime.bigint();
-      //dev编译 运行时间间隔
-      const devTimeInterval = utils.timeIntervalFn(devStartTime, devEndTime, 's', 2);
-
-      console.log(
-        chalk.cyan(
-          `  Compile cost ${devTimeInterval} s , Pre hook script run cost ${hookScriptTimeInterval} s . \n`
-        )
       );
 
       resolve(devWebpackConfig);
