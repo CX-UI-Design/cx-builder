@@ -1,6 +1,6 @@
 {
   "name": "cx-builder",
-  "version": "0.0.53-47",
+  "version": "0.0.53-48",
   "description": "cx-builder for build tools",
   "author": "BroccoliSpring <Lensgcx@163.com>",
   "private": false,
@@ -129,7 +129,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+
     }
   }
 }
