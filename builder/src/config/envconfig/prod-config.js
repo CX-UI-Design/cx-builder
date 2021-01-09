@@ -71,9 +71,31 @@ module.exports = {
     prodJsSourceMap: false, // 是否开启 jsSourceMap
     cacheBusting: true,
 
-    clearWarning: false, //在控制台去除警告日志
     dropConsole: true, //去除 console
     dropDebugger: true, //去除 debugger
+
+    //构建下，控制台输出设置
+    statsPrint: {
+      //告知 stats 是否输出不同的颜色
+      colors: true,
+      //告知 stats 添加关于 webpack 版本的信息
+      version: false,
+      //告知 stats 添加时间信息。
+      timings: true,
+      //告知 stats 是否添加关于编译哈希值的信息
+      hash: true,
+      //告知 stats 添加告警
+      warnings: true,
+      //添加展示 warnings 个数。
+      warningsCount: true,
+      //告知 stats 是否展示资源信息。将 stats.assets 设置成 false 会禁用.
+      assets: false,
+
+      modules: false, //告知 stats 是否添加关于构建模块的信息。
+      children: false, //告知 stats 是否添加关于子模块的信息. If you are using ts-loader, setting this to true will make TypeScript errors show up during build.
+      chunks: false, //告知 stats 是否添加关于 chunk 的信息。 将 stats.chunks 设置为 false 会引发更少的输出。
+      chunkModules: false, //告知 stats 是否添加关于已构建模块和关于 chunk 的信息。
+    },
 
     filterEntries: [], //在MPA 模式下，过滤掉的模块页面
 
