@@ -13,8 +13,25 @@ const utils = require('../../utils');
 const hs = require('../hookScript');
 
 module.exports = profConf => {
+  //构建计时开始：初始时间
+  const prodStartTime = process.hrtime.bigint();
+
+  //前置钩子 计时开始：初始时间
+  const hookScriptStartTime = process.hrtime.bigint();
+
   //run pre script
   hs.runHookScript('pre');
+
+  //前置钩子 计时结束：结束时间
+  const hookScriptEndTime = process.hrtime.bigint();
+
+  //前置钩子 运行时间间隔
+  const hookScriptTimeInterval = utils.timeIntervalFn(
+    hookScriptStartTime,
+    hookScriptEndTime,
+    's',
+    2
+  );
 
   console.log('\n');
   const spinner = ora('building for production...');
@@ -42,7 +59,18 @@ module.exports = profConf => {
           process.exit(1);
         }
 
+        //构建计时结束：结束时间
+        const prodEndTime = process.hrtime.bigint();
+        //构建 运行时间间隔
+        const prodTimeInterval = utils.timeIntervalFn(prodStartTime, prodEndTime, 's', 2);
+
         console.log(chalk.cyan('  Build complete.\n'));
+        console.log(
+          chalk.red(
+            `  Build cost ${prodTimeInterval} s , Pre hook script cost ${hookScriptTimeInterval} s . \n`
+          )
+        );
+
         console.log(
           chalk.yellow(
             '  Tip: built files are meant to be served over an HTTP server.\n' +

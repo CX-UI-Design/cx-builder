@@ -250,3 +250,23 @@ exports.createNotifierCallback = () => {
     });
   };
 };
+
+/**
+ * 计算时间间隔
+ * @param startTime - 开始时间，由 process.hrtime.bigint() 计算得出，单位纳秒
+ * @param endTime - 结束时间，由 process.hrtime.bigint() 计算得出，单位纳秒
+ * @param unit - 转换换算单位，由纳秒转换为？
+ * @param fixed - 小数点后保留几位
+ * @returns {string}
+ */
+exports.timeIntervalFn = (startTime, endTime, unit, fixed = 2) => {
+  const unitMap = {
+    s: 1e9, //秒
+    ms: 1e6, //毫秒
+    μs: 1e3, //微秒
+    ns: 1, //纳秒
+  };
+
+  const u = unitMap[unit] || 1e9;
+  return (Number(`${startTime - endTime}` + '') / u).toFixed(fixed);
+};
