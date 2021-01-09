@@ -19,7 +19,7 @@ const utils = require('../utils');
 const config = require('../config');
 const rules = require('./webpack.rules.conf.js');
 
-module.exports = {
+const baseWebpackConfig = {
   context: utils.rootPath(''), //path.resolve(__dirname, '../')
   entry: utils.getPropertyByEnv('entry'),
   output: {
@@ -37,9 +37,6 @@ module.exports = {
     rules: [...rules],
   },
   plugins: [
-    //webpack 构建编译进度条 插件
-    new WebpackBar(),
-
     new VueLoaderPlugin(),
 
     new webpack.ProvidePlugin({
@@ -62,3 +59,16 @@ module.exports = {
     child_process: 'empty',
   },
 };
+
+const isProd = process.env.NODE_ENV === 'production';
+
+/**
+ * 处于打包构建prod模式下，需要加入构建编译进度条
+ */
+if (isProd) {
+  baseWebpackConfig.plugins.push(
+    //webpack 构建编译进度条 插件
+    new WebpackBar()
+  );
+}
+module.exports = baseWebpackConfig;
