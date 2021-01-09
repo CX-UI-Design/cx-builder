@@ -44,15 +44,9 @@ module.exports = profConf => {
       webpack(profConf, (err, stats) => {
         spinner.stop();
         if (err) throw err;
-        process.stdout.write(
-          stats.toString({
-            colors: true,
-            modules: false,
-            children: false, // If you are using ts-loader, setting this to true will make TypeScript errors show up during build.
-            chunks: false,
-            chunkModules: false,
-          }) + '\n\n'
-        );
+
+        //构建下，控制台输出设置
+        process.stdout.write(stats.toString(config.prod.statsPrint) + '\n\n');
 
         if (stats.hasErrors()) {
           console.log(chalk.red('  Build failed with errors.\n'));
@@ -66,8 +60,8 @@ module.exports = profConf => {
 
         console.log(chalk.cyan('  Build complete.\n'));
         console.log(
-          chalk.red(
-            `  Build cost ${prodTimeInterval} s , Pre hook script cost ${hookScriptTimeInterval} s . \n`
+          chalk.cyan(
+            `  Build cost ${prodTimeInterval} s , Pre hook script run cost ${hookScriptTimeInterval} s . \n`
           )
         );
 
