@@ -13,6 +13,8 @@ const webpack = require('webpack');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 // 设置了extract：true，所以还需要在plugins中引入，否则会报错
 const SvgSpriteLoader = require('svg-sprite-loader/plugin');
+const WebpackBar = require('webpackbar'); //webpack 构建编译进度条 插件
+
 const utils = require('../utils');
 const config = require('../config');
 const rules = require('./webpack.rules.conf.js');
@@ -35,6 +37,9 @@ module.exports = {
     rules: [...rules],
   },
   plugins: [
+    //webpack 构建编译进度条 插件
+    new WebpackBar(),
+
     new VueLoaderPlugin(),
 
     new webpack.ProvidePlugin({
