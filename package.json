@@ -1,13 +1,13 @@
 {
   "name": "cx-builder",
-  "version": "0.0.53-48",
+  "version": "0.0.53-50",
   "description": "cx-builder for build tools",
   "author": "BroccoliSpring <Lensgcx@163.com>",
   "private": false,
   "main": "lib/run/index.js",
   "scripts": {
     "build": "./build.sh",
-    "prettier":"cross-env node ./builder/src/prettier/prettier.js",
+    "prettier": "cross-env node ./builder/src/prettier/prettier.js",
     "release": "node ./builder/src/tools/release/index.js --version_mode prerelease",
     "latest": "node ./builder/src/tools/release/index.js --version_mode latest"
   },
@@ -63,6 +63,7 @@
     "file-loader": "3.0.1",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "fs-extra": "^7.0.1",
+    "happypack": "^5.0.1",
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "4.0.0-beta.5",
     "husky": "^2.2.0",
@@ -121,11 +122,11 @@
     "not ie <= 8"
   ],
   "lint-staged": {
-    "builder/src/**/*.{js,json,jsx,less}": [
+    "builder/src123/**/*.{js,json,jsx,less}": [
       "node node_modules/cx-builder/lib/prettier/lint-prettier.js",
       "git add"
     ],
-    "builder/src/**/*.{less,scss,sass}": "stylelint --syntax less"
+    "builder/src123/**/*.{less,scss,sass}": "stylelint --syntax less"
   },
   "husky": {
     "hooks": {
