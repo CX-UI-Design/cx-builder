@@ -22,12 +22,12 @@ function Fn_run_cloud_mock {
 
 #4、run build
 function Fn_run_prod {
-  cross-env NODE_ENV=production env_config=prod process_by_sign=prod_env node ${WORKDIR}/run/prod/run.prod${min_suffix}.js
+  cross-env NODE_ENV=production env_config=prod process_by_sign=prod_env node --max_old_space_size=16384 ${WORKDIR}/run/prod/run.prod${min_suffix}.js
 }
 
 #5、run build plugin
 function Fn_run_prod_plugin {
-  cross-env NODE_ENV=production env_config=plugin process_by_sign=prod_env node ${WORKDIR}/run/prod/run.prod.plugin${min_suffix}.js
+  cross-env NODE_ENV=production env_config=plugin process_by_sign=prod_env node --max_old_space_size=16384 ${WORKDIR}/run/prod/run.prod.plugin${min_suffix}.js
 }
 
 #6、run prettier code
