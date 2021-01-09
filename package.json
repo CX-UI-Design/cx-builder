@@ -7,6 +7,7 @@
   "main": "lib/run/index.js",
   "scripts": {
     "build": "./build.sh",
+    "prettier":"cross-env node ./builder/src/prettier/prettier.js",
     "release": "node ./builder/src/tools/release/index.js --version_mode prerelease",
     "latest": "node ./builder/src/tools/release/index.js --version_mode latest"
   },
@@ -118,5 +119,17 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "lint-staged": {
+    "builder/src/**/*.{js,json,jsx,less}": [
+      "node node_modules/cx-builder/lib/prettier/lint-prettier.js",
+      "git add"
+    ],
+    "builder/src/**/*.{less,scss,sass}": "stylelint --syntax less"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }
