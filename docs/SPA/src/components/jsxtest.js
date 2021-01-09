@@ -9,16 +9,11 @@ export default {
   data() {
     return {
       title: 'jsx - test123123 ',
-    }
+    };
   },
   render(h) {
-    return (
-      <h1>{this.title}</h1>
-    )
+    return <h1>{this.title}</h1>;
   },
-  created() {
-
-  },
+  created() {},
   methods: {},
 };
-

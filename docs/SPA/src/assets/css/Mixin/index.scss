@@ -2,8 +2,9 @@
   &:after {
     clear: both;
   }
-  &:after, &:before {
+  &:after,
+  &:before {
     display: table;
-    content: "";
+    content: '';
   }
 }

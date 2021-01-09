@@ -11,7 +11,7 @@
   border-radius: $R;
 }
 
-@mixin transition( $property,$duration,$timing-function) {
+@mixin transition($property, $duration, $timing-function) {
   -moz-transition: $property $duration $timing-function;
   -webkit-transition: $property $duration $timing-function;
   -o-transition: $property $duration $timing-function;
@@ -19,11 +19,13 @@
 }
 
 @mixin scrollbarVisible() {
-  &::-webkit-scrollbar-thumb:vertical, &::-webkit-scrollbar-thumb:horizontal {
+  &::-webkit-scrollbar-thumb:vertical,
+  &::-webkit-scrollbar-thumb:horizontal {
     visibility: hidden;
   }
   &:hover {
-    &::-webkit-scrollbar-thumb:vertical, &::-webkit-scrollbar-thumb:horizontal {
+    &::-webkit-scrollbar-thumb:vertical,
+    &::-webkit-scrollbar-thumb:horizontal {
       visibility: visible;
       transition: all 3s linear;
     }

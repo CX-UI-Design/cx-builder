@@ -1,48 +1,48 @@
 const selectUnit = {
-  "picked": {
-    "unit": "",
-    "value": ""
+  picked: {
+    unit: '',
+    value: '',
   },
-  "options": [
+  options: [
     {
-      "unit": "0",
-      "label": "234234432",
-      "value": 82
-    }
-  ]
+      unit: '0',
+      label: '234234432',
+      value: 82,
+    },
+  ],
 };
 
 const select = {
-  "picked": {
-    "value": ""
+  picked: {
+    value: '',
   },
-  "options": [
+  options: [
     {
-      "label": "234234432",
-      "value": 82
-    }
-  ]
+      label: '234234432',
+      value: 82,
+    },
+  ],
 };
 
 const checkbox = {
-  "picked": {
-    "value": ""
+  picked: {
+    value: '',
   },
-  "options": [
+  options: [
     {
-      "label": "234234432",
-      "value": 82
-    }
-  ]
+      label: '234234432',
+      value: 82,
+    },
+  ],
 };
 const radio = {
-  "picked": {
-    "value": ""
+  picked: {
+    value: '',
   },
-  "options": [
+  options: [
     {
-      "label": "234234432",
-      "value": 82
-    }
-  ]
+      label: '234234432',
+      value: 82,
+    },
+  ],
 };

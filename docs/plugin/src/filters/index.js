@@ -1,5 +1,4 @@
-import {judgeType} from '../utils/index'
-
+import { judgeType } from '../utils/index';
 
 /**
  * Other formats convert to string format
@@ -9,15 +8,12 @@ import {judgeType} from '../utils/index'
  */
 export function allToString(val) {
   if (judgeType(val) === 'array') {
-    return val.join(",");
-  }
-  else if (judgeType(val) === 'string') {
+    return val.join(',');
+  } else if (judgeType(val) === 'string') {
     return val;
-  }
-  else if (judgeType(val) === 'boolean') {
+  } else if (judgeType(val) === 'boolean') {
     return val ? 'true' : 'false';
-  }
-  else {
+  } else {
     return val ? JSON.stringify(val) : '';
   }
 }
@@ -27,6 +23,4 @@ export function allToString(val) {
  * @param val
  * @param key
  */
-export function changeVal(val, key) {
-
-}
+export function changeVal(val, key) {}

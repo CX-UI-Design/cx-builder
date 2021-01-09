@@ -7,9 +7,9 @@ const service = axios.create({
   timeout: 5000,
   withCredentials: true,
   headers: {
-    'appId': '07d8737811434732',
-    "appClientType": "pc",
-  }
+    appId: '07d8737811434732',
+    appClientType: 'pc',
+  },
 });
 
 service.interceptors.request.use(
@@ -25,10 +25,9 @@ service.interceptors.response.use(
   // response => response,
   response => {
     const resData = response.data;
-    if (resData && (resData.resultCode === "200" || resData.resultCode === 200)) {
+    if (resData && (resData.resultCode === '200' || resData.resultCode === 200)) {
       return Promise.resolve(resData);
-    }
-    else {
+    } else {
       return Promise.reject(resData);
     }
   },

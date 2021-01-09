@@ -1,4 +1,4 @@
-import {arrContainObj} from '../../../../utils/index';
+import { arrContainObj } from '../../../../utils/index';
 import validateRule from '../../../../utils/validate/validate-rule';
 
 export default {
@@ -8,29 +8,30 @@ export default {
   data() {
     return {
       //form cell status
-      formCellList: ['link', 'input', 'rate', 'date', 'checkbox', 'radio', 'select', 'select-unit',],
+      formCellList: ['link', 'input', 'rate', 'date', 'checkbox', 'radio', 'select', 'select-unit'],
       deleteKey: 'empty-check-list',
       errClass: 'cx-is-error',
       normalErrMsg: '请正确选择/输入',
     };
   },
   props: {
-    gridID: {type: String},//表格ID值
+    gridID: { type: String }, //表格ID值
     scope: {
-      type: Object, default() {
+      type: Object,
+      default() {
         return {
-          row: {}
-        }
-      }
-    },//当前行-表格数据
-    item: {type: Object},//当前列-表头数据
-    gridCheck: {type: Object},//grid check data for form in grid cell
-    rowIndex: {type: Number},//行索引
-    colIndex: {type: Number},//列索引
-    firstRowHasError: {type: Object},//第一行数中 表单 单元格是否存在验证错误的情况
-    keyRefer: {type: Object},//key refer for grid
-    wrapperHeight: {type: Number},
-    topGapForErrMsg: {type: Number},//表格第一行顶部留白间距（为验证错误信息腾出空间)
+          row: {},
+        };
+      },
+    }, //当前行-表格数据
+    item: { type: Object }, //当前列-表头数据
+    gridCheck: { type: Object }, //grid check data for form in grid cell
+    rowIndex: { type: Number }, //行索引
+    colIndex: { type: Number }, //列索引
+    firstRowHasError: { type: Object }, //第一行数中 表单 单元格是否存在验证错误的情况
+    keyRefer: { type: Object }, //key refer for grid
+    wrapperHeight: { type: Number },
+    topGapForErrMsg: { type: Number }, //表格第一行顶部留白间距（为验证错误信息腾出空间)
   },
   computed: {
     //key refer for grid head
@@ -42,25 +43,25 @@ export default {
       return this.keyRefer.scope;
     },
     cell_className() {
-      return {}
+      return {};
     },
     //form config object
     formConfig() {
       return this.item[this.headRefer['cell-Config']];
-    }
+    },
   },
   render(h) {
-    const isFormRender = this.formCellRender(this.item);// is form cell render
-    const modelCode = this.item[this.headRefer['model-code']];  //key
+    const isFormRender = this.formCellRender(this.item); // is form cell render
+    const modelCode = this.item[this.headRefer['model-code']]; //key
     const cellKey = modelCode + '-' + this.rowIndex + '-' + this.colIndex;
     //set param
     const Param = {
-      modelCode: modelCode,         //get this col model key in gird head data
-      scope: this.scope,            //get this row data
-      item: this.item,              //this col data in grid head
-      cellKey: cellKey,             //cell key ( modelCode + row-index + row-index )
-      headRefer: this.headRefer,    //head refer
-      scopeRefer: this.scopeRefer   //scope refer
+      modelCode: modelCode, //get this col model key in gird head data
+      scope: this.scope, //get this row data
+      item: this.item, //this col data in grid head
+      cellKey: cellKey, //cell key ( modelCode + row-index + row-index )
+      headRefer: this.headRefer, //head refer
+      scopeRefer: this.scopeRefer, //scope refer
     };
     /**
      * cellRender
@@ -69,107 +70,124 @@ export default {
      * @returns {*}
      */
     let cellRender = (isFormRender, Param) => {
-      const scope = Param.scope;//row data
-      const item = Param.item;//head item data
+      const scope = Param.scope; //row data
+      const item = Param.item; //head item data
       if (isFormRender) {
         let type = this.formConfig.type;
         switch (type) {
           case 'link':
-
             return (
               //title={scope.row[modelCode]}
-              <div class="grid-cell grid-cell_link"
-                   on-click={this.cellAction.bind(this, Param)}
-              >
+              <div class="grid-cell grid-cell_link" on-click={this.cellAction.bind(this, Param)}>
                 {scope.row[modelCode]}
               </div>
             );
           case 'input':
             return (
-              <el-input class="grid-cell" v-model={scope.row[modelCode]} size="mini"
-                        placeholder={this.formConfig.placeHolder}
-                        disabled={this.formConfig.disabled} clearable={true}
-                        on-change={this.formChange.bind(this, Param)}>
-              </el-input>
+              <el-input
+                class="grid-cell"
+                v-model={scope.row[modelCode]}
+                size="mini"
+                placeholder={this.formConfig.placeHolder}
+                disabled={this.formConfig.disabled}
+                clearable={true}
+                on-change={this.formChange.bind(this, Param)}
+              ></el-input>
             );
           case 'rate':
             return (
-              <el-input-number class="grid-cell" v-model={scope.row[modelCode]}
-                               size="mini" min={this.formConfig.min} max={this.formConfig.max}
-                               disabled={this.formConfig.disabled}
-              >
-              </el-input-number>
+              <el-input-number
+                class="grid-cell"
+                v-model={scope.row[modelCode]}
+                size="mini"
+                min={this.formConfig.min}
+                max={this.formConfig.max}
+                disabled={this.formConfig.disabled}
+              ></el-input-number>
             );
           case 'date':
             return (
-              <el-date-picker class="grid-cell" v-model={scope.row[modelCode]}
-                              disabled={this.formConfig.disabled}
-                              size="mini" type="date" editable={false}
-                              placeholder={this.formConfig.placeHolder} value-format="yyyy-MM-dd 00:00:00"
-                              on-change={this.formChange.bind(this, Param)}>
-              </el-date-picker>
+              <el-date-picker
+                class="grid-cell"
+                v-model={scope.row[modelCode]}
+                disabled={this.formConfig.disabled}
+                size="mini"
+                type="date"
+                editable={false}
+                placeholder={this.formConfig.placeHolder}
+                value-format="yyyy-MM-dd 00:00:00"
+                on-change={this.formChange.bind(this, Param)}
+              ></el-date-picker>
             );
           case 'checkbox':
             return (
-              <el-checkbox-group class="grid-cell" v-model={scope.row[modelCode].picked.value} disabled={this.formConfig.disabled}
-                                 size="mini" min={this.formConfig.min} max={this.formConfig.max}
-                                 on-change={this.formChange.bind(this, Param)}>
-                {
-                  scope.row[modelCode].options.map((item, $index) =>
-                    [
-                      <el-checkbox key={item.value} label={item.label}></el-checkbox>
-                    ]
-                  )
-                }
+              <el-checkbox-group
+                class="grid-cell"
+                v-model={scope.row[modelCode].picked.value}
+                disabled={this.formConfig.disabled}
+                size="mini"
+                min={this.formConfig.min}
+                max={this.formConfig.max}
+                on-change={this.formChange.bind(this, Param)}
+              >
+                {scope.row[modelCode].options.map((item, $index) => [
+                  <el-checkbox key={item.value} label={item.label}></el-checkbox>,
+                ])}
               </el-checkbox-group>
             );
           case 'radio':
             return (
-              <el-radio-group class="grid-cell" v-model={scope.row[modelCode].picked.value} disabled={this.formConfig.disabled}
-                              size="mini" on-change={this.formChange.bind(this, Param)}>
-                {
-                  scope.row[modelCode].options.map((item, $index) =>
-                    [
-                      <el-radio key={item.value} label={item.label}></el-radio>
-                    ]
-                  )
-                }
+              <el-radio-group
+                class="grid-cell"
+                v-model={scope.row[modelCode].picked.value}
+                disabled={this.formConfig.disabled}
+                size="mini"
+                on-change={this.formChange.bind(this, Param)}
+              >
+                {scope.row[modelCode].options.map((item, $index) => [
+                  <el-radio key={item.value} label={item.label}></el-radio>,
+                ])}
               </el-radio-group>
             );
           case 'select':
             return (
-              <el-select class="grid-cell" v-model={scope.row[modelCode].picked.value} size="mini" editable={false} disabled={this.formConfig.disabled}
-                         placeholder={this.formConfig.placeHolder} clearable={true}
-                         on-change={this.formChange.bind(this, Param)}>
-                {
-                  scope.row[modelCode].options.map((item, $index) =>
-                    [
-                      <el-option key={item.value} label={item.label} value={item.value}></el-option>
-                    ]
-                  )
-                }
+              <el-select
+                class="grid-cell"
+                v-model={scope.row[modelCode].picked.value}
+                size="mini"
+                editable={false}
+                disabled={this.formConfig.disabled}
+                placeholder={this.formConfig.placeHolder}
+                clearable={true}
+                on-change={this.formChange.bind(this, Param)}
+              >
+                {scope.row[modelCode].options.map((item, $index) => [
+                  <el-option key={item.value} label={item.label} value={item.value}></el-option>,
+                ])}
               </el-select>
             );
           case 'select-unit':
             return (
-              <el-select class="grid-cell" v-model={scope.row[modelCode].picked.value} size="mini" editable={false} disabled={this.formConfig.disabled}
-                         placeholder={this.formConfig.placeHolder} clearable={true}
-                         on-change={this.selectUnitChange.bind(this, Param)}>
-                {
-                  scope.row[modelCode].options.map((item, $index) =>
-                    [
-                      <el-option key={item.value} label={item.label} value={item.value}></el-option>
-                    ]
-                  )
-                }
+              <el-select
+                class="grid-cell"
+                v-model={scope.row[modelCode].picked.value}
+                size="mini"
+                editable={false}
+                disabled={this.formConfig.disabled}
+                placeholder={this.formConfig.placeHolder}
+                clearable={true}
+                on-change={this.selectUnitChange.bind(this, Param)}
+              >
+                {scope.row[modelCode].options.map((item, $index) => [
+                  <el-option key={item.value} label={item.label} value={item.value}></el-option>,
+                ])}
               </el-select>
             );
           default:
-            return (<div>{this.gridCellFifter(scope.row[modelCode], Param.modelCode)}</div>);
+            return <div>{this.gridCellFifter(scope.row[modelCode], Param.modelCode)}</div>;
         }
-      }
-      else {
-        return (<div>{this.gridCellFifter(scope.row[modelCode], Param.modelCode)}</div>);
+      } else {
+        return <div>{this.gridCellFifter(scope.row[modelCode], Param.modelCode)}</div>;
       }
     };
 
@@ -179,41 +197,37 @@ export default {
      */
     let getErrMsg = () => {
       try {
-        const errorMsg = this.formConfig[this.headRefer['errorMsg']];//error message
+        const errorMsg = this.formConfig[this.headRefer['errorMsg']]; //error message
         return errorMsg || this.normalErrMsg;
-      }
-      catch (e) {
+      } catch (e) {
         return this.normalErrMsg;
       }
     };
 
     const errSW = this.validateCheck(Param);
     return (
-      <div class={['cell-container', isFormRender ? 'form-cell' : 'norm-cell', {[this.errClass]: errSW}]}>
+      <div
+        class={[
+          'cell-container',
+          isFormRender ? 'form-cell' : 'norm-cell',
+          { [this.errClass]: errSW },
+        ]}
+      >
+        {cellRender(isFormRender, Param)}
         {
-          cellRender(isFormRender, Param)
-        }
-        {
-          <transition name='cx-grid-errorMsg-fade'>
-            {
-              isFormRender && errSW ?
-                <div class="el-form-item__error">{getErrMsg()}</div>
-                : null
-            }
+          <transition name="cx-grid-errorMsg-fade">
+            {isFormRender && errSW ? <div class="el-form-item__error">{getErrMsg()}</div> : null}
           </transition>
         }
       </div>
-    )
+    );
   },
-  created() {
-
-  },
-  updated: function () {
+  created() {},
+  updated: function() {
     //判断 表格第一行数中 表单 单元格是否存在验证错误的情况
     this.judgeFirstRowHasError();
   },
-  mounted() {
-  },
+  mounted() {},
   watch: {},
   methods: {
     /**
@@ -253,9 +267,8 @@ export default {
             return filter.label;
           }
         }
-      }
-      catch (e) {
-        return this.$grider.fifter.cellFifter(val, key)
+      } catch (e) {
+        return this.$grider.fifter.cellFifter(val, key);
       }
     },
     /**
@@ -263,7 +276,7 @@ export default {
      * @param Param
      */
     cellAction(Param) {
-      this.$emit("cell-action", Param.scope, Param.item);
+      this.$emit('cell-action', Param.scope, Param.item);
     },
 
     /**
@@ -285,40 +298,40 @@ export default {
         const val = scope.row[key];
         try {
           return val[scopeRefer['modelData']].value;
-        }
-        catch (e) {
+        } catch (e) {
           return val;
         }
       };
 
-      const modelCode = Param.item[Param.headRefer['model-code']];  //model code
-      const required = this.formConfig.require;          //form of cell  require switch
-      const ruleType = this.formConfig.validateRule;     //form of cell validate rule
-      const value = getValue(Param.scope, modelCode, Param.scopeRefer);     //get form-cell value
+      const modelCode = Param.item[Param.headRefer['model-code']]; //model code
+      const required = this.formConfig.require; //form of cell  require switch
+      const ruleType = this.formConfig.validateRule; //form of cell validate rule
+      const value = getValue(Param.scope, modelCode, Param.scopeRefer); //get form-cell value
 
       let judge = () => {
         // console.log('judge 开始 ');
         //是否验证通过
-        if (!arrContainObj(this.gridCheck.list, Param.cellKey) && this.gridCheck.state !== 'all-check') return true;
+        if (
+          !arrContainObj(this.gridCheck.list, Param.cellKey) &&
+          this.gridCheck.state !== 'all-check'
+        )
+          return true;
         // console.log('需要验证！！！');
         if (required) {
           // console.log('需要必填 is required ');
           if (value || value === 0) {
             // console.log('有值！！！！！！！！！！！');
             return validateRule(this, value, ruleType);
-          }
-          else {
+          } else {
             // console.log('没有值！！！！！！！！！！！');
             return false;
           }
-        }
-        else {
+        } else {
           // console.log('无需必填 not required ');
           if (value || value === 0) {
             // console.log('有值！！！！！！！！！！！');
             return validateRule(this, value, ruleType);
-          }
-          else {
+          } else {
             return true;
           }
         }
@@ -333,7 +346,7 @@ export default {
       // console.log('内容验证结果 ');
       // console.log(validateRule(this,value, ruleType));
 
-      const j = judge();//最终验证结果
+      const j = judge(); //最终验证结果
       // console.log('最终验证结果');
       // console.log(judge());
       return !j;
@@ -359,7 +372,7 @@ export default {
          * @param h
          * @private
          */
-        let _changeFwrapper = (h) => {
+        let _changeFwrapper = h => {
           for (let Fwrapper of fixedWrapper) {
             Fwrapper.style.height = h + 'px';
           }
@@ -368,14 +381,12 @@ export default {
         if (this.firstRowHasError.value) {
           const h = this.wrapperHeight - this.topGapForErrMsg;
           wrapper.style.height = h + 'px';
-          _changeFwrapper(h - 8);//高度减去下滚动条的高度  or h - 32
-        }
-        else {
+          _changeFwrapper(h - 8); //高度减去下滚动条的高度  or h - 32
+        } else {
           wrapper.style.height = this.wrapperHeight + 'px';
           _changeFwrapper(this.wrapperHeight);
         }
-      }
-      catch (e) {
+      } catch (e) {
         return false;
       }
     },
@@ -387,7 +398,7 @@ export default {
     setFormCellCheck(Param) {
       //when this col type is form we can edit, so we should to  validate in need
       if (this.formConfig) {
-        this.$emit("set-formCell-check", Param.cellKey);//put this form cell key to check list
+        this.$emit('set-formCell-check', Param.cellKey); //put this form cell key to check list
       }
     },
 
@@ -397,7 +408,7 @@ export default {
      * @param value
      */
     formChange(Param, value) {
-      this.setFormCellCheck(Param);//set form-cell check config (check list) in grid
+      this.setFormCellCheck(Param); //set form-cell check config (check list) in grid
     },
 
     /**
@@ -406,12 +417,12 @@ export default {
      * @param value
      */
     selectUnitChange(Param, value) {
-      this.setFormCellCheck(Param);//set form-cell check config (check list) in grid
+      this.setFormCellCheck(Param); //set form-cell check config (check list) in grid
       const modelData = Param.scopeRefer['modelData'];
       const items = Param.scopeRefer['items'];
       const unit = Param.scopeRefer['unit'];
-      const row = Param.scope.row;//row data
-      const options = row[Param.modelCode][items];//select option data
+      const row = Param.scope.row; //row data
+      const options = row[Param.modelCode][items]; //select option data
 
       console.log('selectUnitChange - selectUnitChange');
       console.log(modelData);
@@ -441,12 +452,11 @@ export default {
         }
       }
       console.log('selectUnitChange - 改变后的scope值');
-      console.log(Param.scope)
-    }
+      console.log(Param.scope);
+    },
   },
-  beforeDestroy: function () {
-    this.$emit("set-formCell-check", this.deleteKey);//put this form cell key to check list
+  beforeDestroy: function() {
+    this.$emit('set-formCell-check', this.deleteKey); //put this form cell key to check list
     window.clearTimeout(this.judgeFirstRowHasError);
-  }
+  },
 };
-

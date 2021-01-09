@@ -1,6 +1,6 @@
-import cellFifter from './utils/cell-fifter/cell-fifter'
-import rulesInfo from './utils/validate/rulesInfo'
-import {judgeType} from './utils/index'
+import cellFifter from './utils/cell-fifter/cell-fifter';
+import rulesInfo from './utils/validate/rulesInfo';
+import { judgeType } from './utils/index';
 
 /**
  * Former plug-in external param config
@@ -8,17 +8,17 @@ import {judgeType} from './utils/index'
  * @param opts
  * @constructor
  */
-export const ConfGrider = function (Vue, opts) {
+export const ConfGrider = function(Vue, opts) {
   // console.log('插件设置传入的参数：')
   // console.log(opts);
   //default param
   let grider = {
-    stageName: 'gcx',//stage name config
-    stageNamelink: '-',//stage name link config
-    lan: 'ZH',//language config
-    log: false,//log information show
+    stageName: 'gcx', //stage name config
+    stageNamelink: '-', //stage name link config
+    lan: 'ZH', //language config
+    log: false, //log information show
     fifter: cellFifter, // gird cell fifter function
-    validate: rulesInfo,//rules information for validate
+    validate: rulesInfo, //rules information for validate
   };
   //validate for param user config
   let _confValidate = (obj, key) => {
@@ -32,8 +32,7 @@ export const ConfGrider = function (Vue, opts) {
       if (_confValidate(opts, key)) {
         if (key === 'fifter') {
           grider[key] = Object.assign(grider[key], opts[key]);
-        }
-        else if (key === 'validate') {
+        } else if (key === 'validate') {
           // grider[key] = Object.assign(grider[key], opts[key]);
           /**
            * concat and remove duplicate array
@@ -43,19 +42,18 @@ export const ConfGrider = function (Vue, opts) {
            * @returns {T[] | string}
            * @private
            */
-          let _concat = function (arr1, arr2) {
+          let _concat = function(arr1, arr2) {
             let Arr = arr2.concat();
             for (let i = 0; i < arr1.length; i++) {
               const sw = arr2.some(item => {
-                return item.type === arr1[i].type
+                return item.type === arr1[i].type;
               });
               !sw ? Arr.push(arr1[i]) : 0;
             }
             return Arr;
           };
           grider[key] = _concat(grider[key], opts[key]);
-        }
-        else {
+        } else {
           grider[key] = opts[key];
         }
       }
@@ -64,5 +62,5 @@ export const ConfGrider = function (Vue, opts) {
   // console.log('插件设置后参数：');
   // console.log(grider);
   Vue.prototype.$grider = grider;
-  Vue.grider = grider
+  Vue.grider = grider;
 };

@@ -1,4 +1,4 @@
-import eventBus from "./eventBus";
+import eventBus from './eventBus';
 
 /**
  * judge type accurate
@@ -17,7 +17,7 @@ export function judgeType(value) {
     '[object RegExp]': 'regExp',
     '[object Undefined]': 'undefined',
     '[object Null]': 'null',
-    '[object Object]': 'object'
+    '[object Object]': 'object',
   };
   if (value instanceof Element) {
     return 'element';
@@ -40,9 +40,8 @@ export function arrContainObj(arr, obj) {
       }
     }
     return false;
-  }
-  else {
-    this.throw("the object of the judgment must be a array format ，you better find it");
+  } else {
+    this.throw('the object of the judgment must be a array format ，you better find it');
   }
 }
 
@@ -56,7 +55,7 @@ export function arrContainObj(arr, obj) {
 export function debounce(func, wait, immediate) {
   let timeout, args, context, timestamp, result;
 
-  const later = function () {
+  const later = function() {
     const last = +new Date() - timestamp;
     if (last < wait && last > 0) {
       timeout = setTimeout(later, wait - last);
@@ -68,7 +67,7 @@ export function debounce(func, wait, immediate) {
       }
     }
   };
-  return function (...args) {
+  return function(...args) {
     context = this;
     timestamp = +new Date();
     const callNow = immediate && !timeout;
@@ -87,9 +86,9 @@ export function debounce(func, wait, immediate) {
  */
 export function stopPropagation(e) {
   if (e && e.stopPropagation) {
-    e.stopPropagation();//W3C stop propagation
+    e.stopPropagation(); //W3C stop propagation
   } else {
-    window.event.cancelBubble = true;//IE stop propagation
+    window.event.cancelBubble = true; //IE stop propagation
   }
 }
 
@@ -104,9 +103,9 @@ export function addEventHandler(target, type, func) {
     //监听IE9，谷歌和火狐
     target.addEventListener(type, func, false);
   } else if (target.attachEvent) {
-    target.attachEvent("on" + type, func);
+    target.attachEvent('on' + type, func);
   } else {
-    target["on" + type] = func;
+    target['on' + type] = func;
   }
 }
 
@@ -121,9 +120,9 @@ export function removeEventHandler(target, type, func) {
     //监听IE9，谷歌和火狐
     target.removeEventListener(type, func, false);
   } else if (target.detachEvent) {
-    target.detachEvent("on" + type, func);
+    target.detachEvent('on' + type, func);
   } else {
-    delete target["on" + type];
+    delete target['on' + type];
   }
 }
 
@@ -134,10 +133,10 @@ export function removeEventHandler(target, type, func) {
  * @returns {null}
  */
 export function getQuery(url, name) {
-  let reg = new RegExp("(^|\\?|&)" + name + "=([^&]*)(\\area-linkage|&|$)", "i");
+  let reg = new RegExp('(^|\\?|&)' + name + '=([^&]*)(\\area-linkage|&|$)', 'i');
   if (url) {
     if (reg.test(url)) {
-      const val = unescape(RegExp.$2.replace(/\+/g, " "));
+      const val = unescape(RegExp.$2.replace(/\+/g, ' '));
 
       if (val !== null && val.toString().length >= 1) {
         return val;
@@ -166,7 +165,7 @@ export function getMockQuery(config, name) {
  * @returns {boolean}
  */
 export function hasClass(elements, cName) {
-  return !!elements.className.match(new RegExp("(\\s|^)" + cName + "(\\s|$)")); // ( \\s|^ ) 判断前面是否有空格 （\\s | $ ）判断后面是否有空格 两个感叹号为转换为布尔值 以方便做判断
+  return !!elements.className.match(new RegExp('(\\s|^)' + cName + '(\\s|$)')); // ( \\s|^ ) 判断前面是否有空格 （\\s | $ ）判断后面是否有空格 两个感叹号为转换为布尔值 以方便做判断
 }
 
 /**
@@ -187,7 +186,7 @@ export function addClass(elements, cName) {
  */
 export function removeClass(elements, cName) {
   if (hasClass(elements, cName)) {
-    elements.className = elements.className.replace(new RegExp("(\\s|^)" + cName + "(\\s|$)"), " "); // replace方法是替换
+    elements.className = elements.className.replace(new RegExp('(\\s|^)' + cName + '(\\s|$)'), ' '); // replace方法是替换
   }
 }
 
@@ -197,8 +196,8 @@ export function removeClass(elements, cName) {
  * @returns {number}
  */
 export function countRange(holderInfo) {
-  const fatherID = holderInfo.fatherID;//father element className
-  const childIDList = holderInfo.childIDList;//children elements className list
+  const fatherID = holderInfo.fatherID; //father element className
+  const childIDList = holderInfo.childIDList; //children elements className list
 
   /**
    * get style
@@ -210,8 +209,7 @@ export function countRange(holderInfo) {
   function _getStyle(obj, attr) {
     if (obj.currentStyle) {
       return obj.currentStyle[attr];
-    }
-    else {
+    } else {
       return document.defaultView.getComputedStyle(obj, null)[attr];
     }
   }
@@ -239,19 +237,20 @@ export function countRange(holderInfo) {
    * @private
    */
   function _realTotalHeight(fatherID, childIDList) {
-
     /*
-    * 判断父级内部容器高度时候，只需计算内部控件即可
-    * 1、content-box => 直接取 offsetHeight 高度
-    * 2、border-box  => 取 offsetHeight 高度后取出 padding 高度
-    * ===========================================================================
-    */
+     * 判断父级内部容器高度时候，只需计算内部控件即可
+     * 1、content-box => 直接取 offsetHeight 高度
+     * 2、border-box  => 取 offsetHeight 高度后取出 padding 高度
+     * ===========================================================================
+     */
     const faNode = document.getElementById(fatherID); //父级容器
     if (!faNode) {
-      throw 'the father element whitch ID is "' + fatherID + '" is not found, find it in grid component.';
+      throw 'the father element whitch ID is "' +
+        fatherID +
+        '" is not found, find it in grid component.';
     }
-    const fbs = _getStyle(faNode, 'boxSizing');//get style of box-sizing
-    let faNodeH = 0;//init height
+    const fbs = _getStyle(faNode, 'boxSizing'); //get style of box-sizing
+    let faNodeH = 0; //init height
 
     //father element height
     if (fbs === 'content-box') {
@@ -272,15 +271,15 @@ export function countRange(holderInfo) {
      * 默认全部增加 box-size = 'borderBox' 后取 offsetHeight 高度
      * 循环实现高度累加
      * ===========================================================================
-    */
+     */
     let childTotalH = 0;
     childIDList.forEach(id => {
       const node = document.getElementById(id); //容器
       let realH = 0;
       if (node) {
-        addClass(node, 'borderBox');//add className => add style box-size ( borderBox )
+        addClass(node, 'borderBox'); //add className => add style box-size ( borderBox )
         const nodeH = node.offsetHeight; //child element height
-        realH = nodeH + _getInHeight(node, ['marginTop', 'marginBottom']);//add margin height
+        realH = nodeH + _getInHeight(node, ['marginTop', 'marginBottom']); //add margin height
       }
       childTotalH = childTotalH + realH;
     });
@@ -326,17 +325,15 @@ export function getTotalList(keyRefer, tableList, headList, sumFixedNum) {
   tableList.forEach((item, index) => {
     for (let key in item) {
       if (arrContainObj(attrList, key)) {
-
         // console.log('新增加的 数字信息');
         // console.log(Number(item[key]));
 
-        sumObj[key] = Number(sumObj[key] ? sumObj[key] : 0) + Number(item[key]);//累加
+        sumObj[key] = Number(sumObj[key] ? sumObj[key] : 0) + Number(item[key]); //累加
         //累加到最后一项时，小数点后保留n位置
         if (index === len - 1) {
-          sumObj[key] = sumObj[key].toFixed(sumFixedNum);//保留几位小数
+          sumObj[key] = sumObj[key].toFixed(sumFixedNum); //保留几位小数
         }
-      }
-      else {
+      } else {
         sumObj[key] = '';
       }
       // console.log('当前数字信息累加值');
@@ -347,4 +344,3 @@ export function getTotalList(keyRefer, tableList, headList, sumFixedNum) {
   // console.log(sumObj);
   return sumObj;
 }
-

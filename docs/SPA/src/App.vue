@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <img src="./assets/img/logo.png">
-    <img src="./assets/img/null.png">
+    <img src="./assets/img/logo.png" />
+    <img src="./assets/img/null.png" />
     <div class="img"></div>
-    <router-view/>
+    <router-view />
     <jsxtest></jsxtest>
     <testContent></testContent>
     <div style="margin-top: 30px">
@@ -16,82 +16,78 @@
 </template>
 
 <script>
-  import jsxtest from './components/jsxtest.js'
-  import testContent from './components/testContent.js'
-  import qs from 'querystring';
-  import insertService from './insertService';
-  import test from '@core'
+import jsxtest from './components/jsxtest.js';
+import testContent from './components/testContent.js';
+import qs from 'querystring';
+import insertService from './insertService';
+import test from '@core';
 
-  export default {
-    name: 'App',
-    components: {jsxtest, testContent},
-    created() {
-      const InsertService = new insertService();
-      InsertService.insert();
+export default {
+  name: 'App',
+  components: { jsxtest, testContent },
+  created() {
+    const InsertService = new insertService();
+    InsertService.insert();
+  },
+  methods: {
+    login() {
+      this.$fetch({
+        url: '/oauth/login',
+        method: 'post',
+        data: {
+          username: 'test-name',
+          password: 'LXgbEFC8kna7yznMVtmheA==',
+          sex: 2,
+        },
+        transformRequest: [
+          function(data) {
+            data = qs.stringify(data);
+            console.log('登录请求发送前数据处理，处理结果：————' + data);
+            return data;
+          },
+        ],
+      }).then(res => {
+        console.log(res);
+      });
     },
-    methods: {
-      login() {
-        this.$fetch({
-            url: '/oauth/login',
-            method: 'post',
-            data: {
-              username: "test-name",
-              password: "LXgbEFC8kna7yznMVtmheA==",
-              sex: 2
-            },
-            transformRequest: [function (data) {
-              data = qs.stringify(data);
-              console.log('登录请求发送前数据处理，处理结果：————' + data);
-              return data;
-            }]
-          }
-        ).then(res => {
-          console.log(res);
-        });
-      },
-      clickGET() {
-        this.$fetch(
-          {
-            url: '/test/get',
-            method: 'get',
-            data: {
-              name: 'get-name'
-            },
-          }
-        ).then(res => {
-          console.log(res);
-        });
-      },
-      clickPOST() {
-        this.$fetch(
-          {
-            url: '/test/post',
-            method: 'post',
-            data: {
-              name: 'post-name'
-            },
-          }
-        ).then(res => {
-          console.log(res);
-        });
-      }
-    }
-  }
-
+    clickGET() {
+      this.$fetch({
+        url: '/test/get',
+        method: 'get',
+        data: {
+          name: 'get-name',
+        },
+      }).then(res => {
+        console.log(res);
+      });
+    },
+    clickPOST() {
+      this.$fetch({
+        url: '/test/post',
+        method: 'post',
+        data: {
+          name: 'post-name',
+        },
+      }).then(res => {
+        console.log(res);
+      });
+    },
+  },
+};
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-    .img {
-      width: 200px;
-      height: 200px;
-      background-image: url("./assets/img/error.png");
-    }
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+  .img {
+    width: 200px;
+    height: 200px;
+    background-image: url('./assets/img/error.png');
   }
+}
 </style>

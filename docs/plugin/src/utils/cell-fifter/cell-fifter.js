@@ -16,5 +16,5 @@ export default {
    */
   test: (val, key) => {
     return val;
-  }
-}
+  },
+};

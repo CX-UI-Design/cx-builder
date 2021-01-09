@@ -1,19 +1,18 @@
-import * as filters from './filters/index';//filter
-import {ConfGrider} from './config'
-import init from './init'
-import {getStageName} from './rename'
+import * as filters from './filters/index'; //filter
+import { ConfGrider } from './config';
+import init from './init';
+import { getStageName } from './rename';
 
 const version = require('../package.json').version;
 //iconfont - config
-import './utils/svgConfig'
+import './utils/svgConfig';
 
 /* ------------- About Form , its components and other components we need------------- */
 
 //base table
-import BaseGrid from './packages/base-grid/src/base-grid'
+import BaseGrid from './packages/base-grid/src/base-grid';
 //grid operation
-import gridOperation from "./packages/base-grid/src/render/gridOperation";
-
+import gridOperation from './packages/base-grid/src/render/gridOperation';
 
 const components = [
   //base table
@@ -22,7 +21,7 @@ const components = [
   gridOperation,
 ];
 
-const install = function (Vue, opts = {}) {
+const install = function(Vue, opts = {}) {
   //grider plug-in external param config
   ConfGrider(Vue, opts);
 
@@ -31,12 +30,15 @@ const install = function (Vue, opts = {}) {
 
   //binding component
   components.map((component, index) => {
-    Vue.component(getStageName(component.name, Vue.grider.stageName, Vue.grider.stageNamelink, index), component)
+    Vue.component(
+      getStageName(component.name, Vue.grider.stageName, Vue.grider.stageNamelink, index),
+      component
+    );
   });
 
   //register global utility filters.
   Object.keys(filters).forEach(key => {
-    Vue.filter(key, filters[key])
+    Vue.filter(key, filters[key]);
   });
 };
 
@@ -57,7 +59,6 @@ if (typeof window !== 'undefined' && window.Vue) {
 //
 // module.exports.default = module.exports;
 
-
 export {
   install,
   version,
@@ -65,10 +66,8 @@ export {
   BaseGrid,
   //grid operation
   gridOperation,
-
 };
 export default {
   install,
-  version
+  version,
 };
-
