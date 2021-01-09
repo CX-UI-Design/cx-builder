@@ -1,10 +1,11 @@
-/**
- * hook script 执行前置 / 后置 钩子脚本
- */
 const shell = require('shelljs');
 const signale = require('signale');
 const utils = require('../utils');
 
+/**
+ * run hook script - 执行 前置/后置 钩子脚本
+ * @param type
+ */
 exports.runHookScript = type => {
   const hookscript = utils.getPropertyByEnv(`${type}script`) || [];
 
