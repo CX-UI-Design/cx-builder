@@ -204,3 +204,8 @@
         "webpack-cli": "3.1.0",
         "webpack-dev-server": "3.1.5",
         "webpack-merge": "4.1.4"
+
+注意：目前，sass-resources-loader在版本为2.0.2时，构建报错
+"sass-resources-loader": "2.0.0",
+固定为2，后续条件允许可改为
+sass-resources-loader "^2.0.0"
